@@ -9,6 +9,7 @@ namespace MLTAscend.Domain
         public string CompanyName { get; set; }
         public DateTime CreationDate { get; set; }
 
+        public double OneDayPred { get; set; }
         public double OneWeekPred { get; set; }
         public double OneMonthPred { get; set; }
         public double ThreeMonthPred { get; set; }
