@@ -7,7 +7,10 @@ namespace MLTAscend.Domain
     public class Prediction
     {
         public string CompanyName { get; set; }
+        public string Ticker { get; set; }
         public DateTime CreationDate { get; set; }
+
+        public User User { get; set; }
 
         public double OneDayPred { get; set; }
         public double OneWeekPred { get; set; }
