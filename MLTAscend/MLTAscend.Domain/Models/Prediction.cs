@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLTAscend.Domain
+namespace MLTAscend.Domain.Models
 {
     public class Prediction
     {
+        public int Id { get; set; }
         public string CompanyName { get; set; }
         public string Ticker { get; set; }
         public DateTime CreationDate { get; set; }
