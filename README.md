@@ -30,7 +30,7 @@ Our goal: create an easy to use system with the ability to reveal lucrative oppo
 
 - [![Nate Johnson](https://avatars0.githubusercontent.com/u/45016880?s=64&v=4)](https://github.com/NateJson) Nate Johnson
 
-- [![Jacob Covington](https://avatars0.githubusercontent.com/u/45204676?s=64&v=4)](https://github.com/degeneffem) Mason Degeneffe
+- [![Mason Degeneffe](https://avatars0.githubusercontent.com/u/45204676?s=64&v=4)](https://github.com/degeneffem) Mason Degeneffe
 
 
 
