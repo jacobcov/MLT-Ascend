@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLTAscend.Data", "MLTAscend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLTAscend.Migration", "MLTAscend.Migration\MLTAscend.Migration.csproj", "{C7FB1D47-AD1A-436A-8349-5C27193C6F47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLTAscend.MVC", "MLTAscend.MVC\MLTAscend.MVC.csproj", "{420F7C7B-B4FD-4452-8589-0C72A0F59715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLTAscend.MVC", "MLTAscend.MVC\MLTAscend.MVC.csproj", "{420F7C7B-B4FD-4452-8589-0C72A0F59715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLTAscend.Tests", "MLTAscend.Tests\MLTAscend.Tests.csproj", "{98189357-171A-471B-8994-6F7BE74530B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{420F7C7B-B4FD-4452-8589-0C72A0F59715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{420F7C7B-B4FD-4452-8589-0C72A0F59715}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{420F7C7B-B4FD-4452-8589-0C72A0F59715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98189357-171A-471B-8994-6F7BE74530B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98189357-171A-471B-8994-6F7BE74530B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98189357-171A-471B-8994-6F7BE74530B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98189357-171A-471B-8994-6F7BE74530B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
