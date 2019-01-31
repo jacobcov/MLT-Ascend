@@ -19,6 +19,7 @@ namespace MLTAscend.Data.Helpers
 
         public bool SetPrediction(dom.Prediction prediction)
         {
+            prediction.CreationDate = DateTime.Now;
             _db.Predictions.Add(prediction);
             return _db.SaveChanges() > 0;
         }
