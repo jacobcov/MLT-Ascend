@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MLTAscend.Data.Helpers
 {
-    class UserHelper
+    public class UserHelper
     {
         private static MLTAscendDbContext _db = new MLTAscendDbContext();
 
@@ -17,6 +17,7 @@ namespace MLTAscend.Data.Helpers
 
         public bool SetUser(dom.User user)
         {
+            user.CreationDate = DateTime.Now;
             _db.Users.Add(user);
             return _db.SaveChanges() > 0;
         }
