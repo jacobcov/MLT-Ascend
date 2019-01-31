@@ -8,13 +8,13 @@ using System.Linq;
 
 namespace MLTAscend.Data.Helpers
 {
-    class PredictionHelper
+    public class PredictionHelper
     {
         private static MLTAscendDbContext _db = new MLTAscendDbContext();
 
-        public dom.Prediction GetPredictionByName(string name)
+        public dom.Prediction GetPredictionByTicker(string ticker)
         {
-            return _db.Predictions.FirstOrDefault(m => m.CompanyName == name);
+            return _db.Predictions.FirstOrDefault(m => m.Ticker == ticker);
         }
 
         public bool SetPrediction(dom.Prediction prediction)
