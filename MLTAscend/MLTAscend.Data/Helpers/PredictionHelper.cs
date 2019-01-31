@@ -14,7 +14,7 @@ namespace MLTAscend.Data.Helpers
 
         public dom.Prediction GetPredictionByTicker(string ticker)
         {
-            return _db.Predictions.FirstOrDefault(m => m.Ticker == ticker);
+            return _db.Predictions.LastOrDefault(m => m.Ticker == ticker);
         }
 
         public bool SetPrediction(dom.Prediction prediction)
