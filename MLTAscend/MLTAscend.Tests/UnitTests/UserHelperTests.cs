@@ -37,5 +37,23 @@ namespace MLTAscend.Tests.UnitTests
 
             Assert.True(actual.Username == sut.Username);
         }
+
+        [Fact]
+        public void Test_GetUserPredictions()
+        {
+            var actual = UserHelper.GetUserPredictions(sut.Username);
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == "ryry");
+        }
+
+        [Fact]
+        public void Test_GetUsers()
+        {
+            var actual = UserHelper.GetUsers();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[6].Username == sut.Username);
+        }
     }
 }

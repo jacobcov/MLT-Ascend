@@ -23,5 +23,10 @@ namespace MLTAscend.Data.Helpers
             _db.Predictions.Add(prediction);
             return _db.SaveChanges() > 0;
         }
+
+        public List<dom.Prediction> GetPredictions()
+        {
+            return _db.Predictions.ToList();
+        }
     }
 }

@@ -19,8 +19,7 @@ namespace MLTAscend.Tests.UnitTests
             {
                 Name = "fred",
                 Username = "belottef",
-                Password = "peoples",
-                Id = 6
+                Password = "peoples"
             };
 
             sut = new dom.Prediction()
@@ -30,7 +29,7 @@ namespace MLTAscend.Tests.UnitTests
 
             };
 
-            //sut.User = User;
+            sut.User = User;
 
             PredictonHelper = new dat.PredictionHelper();
         }
@@ -47,6 +46,15 @@ namespace MLTAscend.Tests.UnitTests
             var actual = PredictonHelper.GetPredictionByTicker(sut.Ticker);
 
             Assert.True(actual.Ticker == sut.Ticker);
+        }
+
+        [Fact]
+        public void Test_GetPredictions()
+        {
+            var actual = PredictonHelper.GetPredictions();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == sut.Ticker);
         }
     }
 }
