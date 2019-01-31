@@ -12,9 +12,15 @@ namespace MLTAscend.Data.Helpers
     {
         private static MLTAscendDbContext _db = new MLTAscendDbContext();
 
-        public dom.User GetUser(string username)
+        public dom.Prediction GetPredictionByName(string name)
         {
-            return _db.Users.FirstOrDefault(m => m.Username == username);
+            return _db.Predictions.FirstOrDefault(m => m.CompanyName == name);
+        }
+
+        public bool SetPrediction(dom.Prediction prediction)
+        {
+            _db.Predictions.Add(prediction);
+            return _db.SaveChanges() > 0;
         }
     }
 }
