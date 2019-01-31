@@ -21,5 +21,15 @@ namespace MLTAscend.Data.Helpers
             _db.Users.Add(user);
             return _db.SaveChanges() > 0;
         }
+
+        public List<dom.Prediction> GetUserPredictions(string username)
+        {
+            return _db.Predictions.Where(m => m.User.Username == username).ToList();
+        }
+
+        public List<dom.User> GetUsers()
+        {
+            return _db.Users.ToList();
+        }
     }
 }
