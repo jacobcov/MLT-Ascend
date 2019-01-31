@@ -49,7 +49,7 @@ namespace MLTAscend.Tests.UnitTests
         }
 
         [Fact]
-        public void Test_GetPredicxtionByTicker()
+        public void Test_GetPredictionByTicker()
         {
             var actual = PredictonHelper.GetPredictions();
 
