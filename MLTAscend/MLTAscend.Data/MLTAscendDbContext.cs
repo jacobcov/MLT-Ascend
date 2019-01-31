@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MLTAscend.Domain.Models;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace MLTAscend.Data
 {
