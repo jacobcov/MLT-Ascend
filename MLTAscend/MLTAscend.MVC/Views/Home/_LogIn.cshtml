@@ -4,23 +4,25 @@
   ViewData["Title"] = "LogIn";
 }
 
-@using (Html.BeginForm("LogIn", "User"))
-{
-  <div class="">
-    @Html.LabelFor(m => m.Username, "Username", new { @class = "" })
-    <div class="">
-      @Html.TextBoxFor(m => m.Username, new { @class = "" })
+<div class="box">
+  @using (Html.BeginForm("LogIn", "User"))
+  {
+    <div class="field">
+      @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
+      <div class="control">
+        @Html.TextBoxFor(m => m.Username, new { @class = "input" })
+      </div>
     </div>
-  </div>
-  <div class="">
-    @Html.LabelFor(m => m.Password, "Password", new { @class = "" })
-    <div class="">
-      @Html.PasswordFor(m => m.Password, new { @class = "" })
+    <div class="field">
+      @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
+      <div class="control">
+        @Html.PasswordFor(m => m.Password, new { @class = "input" })
+      </div>
     </div>
-  </div>
-  <button type="submit" class="" id="login">Log in</button>
-  <div class="">
-    <small class="">Not a User? <a class="" href="signup">Sign up</a> Now.</small>
-  </div>
-}
+    <button type="submit" class="" id="login">Log in</button>
+    <div class="">
+      <small class="">Not a User? <a class="" href="signup">Sign up</a> Now.</small>
+    </div>
+  }
+</div>
 

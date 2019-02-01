@@ -24,7 +24,7 @@ namespace MLTAscend.MVC.Controllers
         {
           //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-          return View("_LoggedIn");
+          return View("LoggedIn");
         };
       }
       return RedirectToAction("SignUp", "Home");
@@ -32,7 +32,7 @@ namespace MLTAscend.MVC.Controllers
 
     public IActionResult SignUp()
     {
-      return View("_SignUp");
+      return View("LoggedIn");
     }
   }
 }
