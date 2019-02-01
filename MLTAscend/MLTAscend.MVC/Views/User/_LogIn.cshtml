@@ -1,7 +1,26 @@
-﻿
+﻿@model MLTAscend.MVC.Models.InUser
+
 @{
-    ViewData["Title"] = "_LogIn";
+  ViewData["Title"] = "LogIn";
 }
 
-<h1>_LogIn</h1>
+@using (Html.BeginForm("LogIn", "User"))
+{
+  <div class="">
+    @Html.LabelFor(m => m.Username, "Username", new { @class = "" })
+    <div class="">
+      @Html.TextBoxFor(m => m.Username, new { @class = "" })
+    </div>
+  </div>
+  <div class="">
+    @Html.LabelFor(m => m.Password, "Password", new { @class = "" })
+    <div class="">
+      @Html.PasswordFor(m => m.Password, new { @class = "" })
+    </div>
+  </div>
+  <button type="submit" class="" id="login">Log in</button>
+  <div class="">
+    <small class="">Not a User? <a class="" href="signup">Sign up</a> Now.</small>
+  </div>
+}
 

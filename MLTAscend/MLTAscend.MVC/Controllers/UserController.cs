@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MLTAscend.MVC.Models;
+using MLTAscend.MVC.ViewModels;
 using dom = MLTAscend.Domain.Models;
 
 namespace MLTAscend.MVC.Controllers
@@ -10,7 +13,7 @@ namespace MLTAscend.MVC.Controllers
   public class UserController : Controller
   {
     //[Route("Home/LogIn")]
-    public IActionResult LogIn(User signIn)
+    public IActionResult LogIn(InUser signIn)
     {
       if (ModelState.IsValid)
       {
@@ -19,12 +22,13 @@ namespace MLTAscend.MVC.Controllers
 
         if (user != null && signIn.Password == user.Password)
         {
-          HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+          //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-          return RedirectToAction("Start", "Order");
+          return View("_LogIn");
         };
       }
-      return RedirectToAction("SignUp", "Home");
+      //return RedirectToAction("SignUp", "Home");
+      return View("_SignUp");
     }
 
     public IActionResult SignUp()
