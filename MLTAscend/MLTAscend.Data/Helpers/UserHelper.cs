@@ -18,7 +18,7 @@ namespace MLTAscend.Data.Helpers
         public bool SetUser(dom.User user)
         {
             var checkuser = GetUserByUsername(user.Username);
-            if (checkuser.Username == user.Username && checkuser != null)
+            if (checkuser.Username == user.Username)
             {
                 return false;
             }

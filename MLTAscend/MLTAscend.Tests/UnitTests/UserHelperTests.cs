@@ -55,7 +55,7 @@ namespace MLTAscend.Tests.UnitTests
         [Fact]
         public void Test_GetUserPredictions()
         {
-            var actual = UserHelper.GetUserPredictions(sut.Username);
+            var actual = UserHelper.GetUserPredictions(ExistUser.Username);
 
             Assert.True(actual.Count > 0);
             Assert.True(actual[0].Ticker == "ryry");
