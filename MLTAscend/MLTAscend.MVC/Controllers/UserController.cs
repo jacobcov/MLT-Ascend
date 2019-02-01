@@ -24,11 +24,10 @@ namespace MLTAscend.MVC.Controllers
         {
           //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-          return View("_LogIn");
+          return View("_LoggedIn");
         };
       }
-      //return RedirectToAction("SignUp", "Home");
-      return View("_SignUp");
+      return RedirectToAction("SignUp", "Home");
     }
 
     public IActionResult SignUp()

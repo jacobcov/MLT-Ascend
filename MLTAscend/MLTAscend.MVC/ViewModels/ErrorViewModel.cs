@@ -1,6 +1,6 @@
 using System;
 
-namespace MLTAscend.MVC.Models
+namespace MLTAscend.MVC.ViewModels
 {
   public class ErrorViewModel
   {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MLTAscend.MVC.Models;
+using MLTAscend.MVC.ViewModels;
 
 namespace MLTAscend.MVC.Controllers
 {
@@ -18,6 +18,16 @@ namespace MLTAscend.MVC.Controllers
     public IActionResult Privacy()
     {
       return View();
+    }
+
+    public IActionResult LogIn()
+    {
+      return View("_LogIn");
+    }
+
+    public IActionResult SignUp()
+    {
+      return View("_SignUp");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
