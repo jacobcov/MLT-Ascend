@@ -10,11 +10,19 @@ namespace MLTAscend.Tests.UnitTests
     public class UserHelperTests
     {
         private dom.User sut;
+        private dom.User ExistUser;
         public dat.UserHelper UserHelper { get; set; }
 
         public UserHelperTests()
         {
             sut = new dom.User()
+            {
+                Name = "jim",
+                Username = "bob",
+                Password = "billy"
+            };
+
+            ExistUser = new dom.User()
             {
                 Name = "fred",
                 Username = "belottef",
@@ -25,9 +33,15 @@ namespace MLTAscend.Tests.UnitTests
         }
 
         [Fact]
-        public void Test_SetUser()
+        public void Test_SetUser_Pass()
         {
             Assert.True(UserHelper.SetUser(sut));
+        }
+
+        [Fact]
+        public void Test_SetUser_Fail()
+        {
+            Assert.False(UserHelper.SetUser(ExistUser));
         }
 
         [Fact]
