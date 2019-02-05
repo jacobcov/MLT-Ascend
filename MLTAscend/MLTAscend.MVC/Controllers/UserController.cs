@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLTAscend.MVC.Models;
 using MLTAscend.MVC.ViewModels;
+using Newtonsoft.Json;
 using dom = MLTAscend.Domain.Models;
 
 namespace MLTAscend.MVC.Controllers
@@ -30,9 +31,25 @@ namespace MLTAscend.MVC.Controllers
       return RedirectToAction("SignUp", "Home");
     }
 
-    public IActionResult SignUp()
+    //[Route("Home/SignUp")]
+    public IActionResult SignUp(UpUser signUp)
     {
-      return View("LoggedIn");
+      if (ModelState.IsValid)
+      {
+        var uvm = new UserViewModel();
+        var users = uvm.GetUsers();
+
+        if (!users.Exists(u => u.Username == signUp.Username) && signUp.Password == signUp.Confirm)
+        {
+          uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
+
+          var user = uvm.GetUsers().Find(u => u.Username == signUp.Username);
+          //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+
+          return View("LoggedIn");
+        };
+      }
+      return RedirectToAction("SignUp", "Home");
     }
   }
 }
