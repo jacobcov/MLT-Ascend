@@ -13,7 +13,7 @@ namespace MLTAscend.MVC.Controllers
 {
   public class UserController : Controller
   {
-    //[Route("Home/LogIn")]
+    // add route
     public IActionResult LogIn(InUser signIn)
     {
       if (ModelState.IsValid)
@@ -23,7 +23,7 @@ namespace MLTAscend.MVC.Controllers
 
         if (user != null && signIn.Password == user.Password)
         {
-          //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+          // add to session
 
           return View("LoggedIn");
         };
@@ -31,7 +31,7 @@ namespace MLTAscend.MVC.Controllers
       return RedirectToAction("SignUp", "Home");
     }
 
-    //[Route("Home/SignUp")]
+    // add route
     public IActionResult SignUp(UpUser signUp)
     {
       if (ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace MLTAscend.MVC.Controllers
           uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
 
           var user = uvm.GetUsers().Find(u => u.Username == signUp.Username);
-          //HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+          // add to session
 
           return View("LoggedIn");
         };
