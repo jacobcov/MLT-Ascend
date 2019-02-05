@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\MLTAscend.Data\MLTAscend.Data.csproj" />
+    <ProjectReference Include="..\MLTAscend.Domain\MLTAscend.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
