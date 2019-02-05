@@ -17,9 +17,17 @@ namespace MLTAscend.Data.Helpers
 
         public bool SetUser(dom.User user)
         {
-            user.CreationDate = DateTime.Now;
-            _db.Users.Add(user);
-            return _db.SaveChanges() > 0;
+            var checkuser = GetUserByUsername(user.Username);
+            if (checkuser.Username == user.Username)
+            {
+                return false;
+            }
+            else
+            {
+                user.CreationDate = DateTime.Now;
+                _db.Users.Add(user);
+                return _db.SaveChanges() > 0;
+            }
         }
 
         public List<dom.Prediction> GetUserPredictions(string username)
