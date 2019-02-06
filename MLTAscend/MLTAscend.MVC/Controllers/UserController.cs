@@ -28,7 +28,7 @@ namespace MLTAscend.MVC.Controllers
           return View("LoggedIn");
         };
       }
-      return RedirectToAction("SignUp", "Home");
+      return View("../Home/_LogIn");
     }
 
     // add route
@@ -49,7 +49,7 @@ namespace MLTAscend.MVC.Controllers
           return View("LoggedIn");
         };
       }
-      return RedirectToAction("SignUp", "Home");
+      return View("../Home/_SignUp");
     }
   }
 }

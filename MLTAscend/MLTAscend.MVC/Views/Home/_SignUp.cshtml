@@ -12,24 +12,28 @@
       <div class="control">
         @Html.TextBoxFor(m => m.Name, new { @class = "input" })
       </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Name)</p>
     </div>
     <div class="field">
       @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
       <div class="control">
         @Html.TextBoxFor(m => m.Username, new { @class = "input" })
       </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Username)</p>
     </div>
     <div class="field">
       @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
       <div class="control">
         @Html.PasswordFor(m => m.Password, new { @class = "input" })
       </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Password)</p>
     </div>
     <div class="field">
       @Html.LabelFor(m => m.Confirm, "Confirm Password", new { @class = "label" })
       <div class="control">
         @Html.PasswordFor(m => m.Confirm, new { @class = "input" })
       </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Confirm)</p>
     </div>
     <div class="control">
       <button type="submit" class="button is-primary" id="signup">Sign Up</button>
@@ -37,4 +41,9 @@
   }
 </div>
 
-
+@section Scripts
+  {
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+}
