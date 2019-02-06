@@ -1,7 +1,40 @@
-﻿
+﻿@model MLTAscend.MVC.Models.UpUser
+
 @{
-    ViewData["Title"] = "_SignUp";
+  ViewData["Title"] = "SignUp";
 }
 
-<h1>_SignUp</h1>
+<div class="box">
+  @using (Html.BeginForm("SignUp", "User"))
+  {
+    <div class="field">
+      @Html.LabelFor(m => m.Name, "Name", new { @class = "label" })
+      <div class="control">
+        @Html.TextBoxFor(m => m.Name, new { @class = "input" })
+      </div>
+    </div>
+    <div class="field">
+      @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
+      <div class="control">
+        @Html.TextBoxFor(m => m.Username, new { @class = "input" })
+      </div>
+    </div>
+    <div class="field">
+      @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
+      <div class="control">
+        @Html.PasswordFor(m => m.Password, new { @class = "input" })
+      </div>
+    </div>
+    <div class="field">
+      @Html.LabelFor(m => m.Confirm, "Confirm Password", new { @class = "label" })
+      <div class="control">
+        @Html.PasswordFor(m => m.Confirm, new { @class = "input" })
+      </div>
+    </div>
+    <div class="control">
+      <button type="submit" class="button is-primary" id="signup">Sign Up</button>
+    </div>
+  }
+</div>
+
 
