@@ -1,3 +1,4 @@
+[![Build status](https://dev.azure.com/JacobCov/MLTAscend/_apis/build/status/MLTAscend-CI)](https://dev.azure.com/JacobCov/MLTAscend/_build/latest?definitionId=13)
 # MLT Ascend
 MLT's first program, a predictive stock tool.
 
