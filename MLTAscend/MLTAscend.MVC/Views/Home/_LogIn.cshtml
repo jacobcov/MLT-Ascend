@@ -19,9 +19,11 @@
         @Html.PasswordFor(m => m.Password, new { @class = "input" })
       </div>
     </div>
-    <button type="submit" class="button is-primary" id="login">Log in</button>
-    <div class="">
-      <small class="">Not a User? <a class="" href="signup">Sign up</a> Now.</small>
+    <div class="control">
+      <button type="submit" class="button is-primary" id="login">Log in</button>
+    </div>
+    <div class="field">
+      <small class="control">Not a User? <a class="is-inline" asp-controller="Home" asp-action="SignUp">Sign Up</a> Now.</small>
     </div>
   }
 </div>
