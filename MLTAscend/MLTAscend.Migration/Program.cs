@@ -2,9 +2,9 @@
 
 namespace MLTAscend.Migration
 {
-    class Program
+    protected class Program
     {
-        protected static void Main(string[] args)
+        static void Main(string[] args)
         {
         }
     }
