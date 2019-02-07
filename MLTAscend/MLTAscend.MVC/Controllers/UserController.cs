@@ -51,5 +51,17 @@ namespace MLTAscend.MVC.Controllers
       }
       return View("../Home/_SignUp");
     }
+
+    public IActionResult Logs()
+    {
+      var uvm = new UserViewModel();
+
+      var log = new Log()
+      {
+        Predictions = uvm.GetPredictions()
+      };
+
+      return View("../User/Logs", log);
+    }
   }
 }

@@ -1,0 +1,46 @@
+﻿@using MLTAscend.Domain.Models
+@using System.Linq
+
+@model MLTAscend.MVC.Models.Log
+
+@{
+  ViewData["Title"] = "PredictionLog";
+}
+
+<table class="table is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th><abbr title="Position">Pos</abbr></th>
+      <th>Company Name</th>
+      <th><abbr title="Ticker">Tkr</abbr></th>
+      <th><abbr title="Creation Date">Date</abbr></th>
+      <th><abbr title="One Day">1d</abbr></th>
+      <th><abbr title="One Week">1w</abbr></th>
+      <th><abbr title="One Month">1mo</abbr></th>
+      <th><abbr title="Three Month">3mo</abbr></th>
+      <th><abbr title="Six Month">6mo</abbr></th>
+      <th><abbr title="One Year">1yr</abbr></th>
+      <th><abbr title="Two Year">2yr</abbr></th>
+      <th><abbr title="Five Year">5yr</abbr></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model.Predictions)
+    {
+    <tr>
+      <th>@(Model.Predictions.IndexOf(item)+1)</th>
+      <th>@item.CompanyName</th>
+      <th>@item.Ticker</th>
+      <th>@item.CreationDate.ToShortDateString()</th>
+      <th>@item.OneDayPred</th>
+      <th>@item.OneWeekPred</th>
+      <th>@item.OneMonthPred</th>
+      <th>@item.ThreeMonthPred</th>
+      <th>@item.SixMonthPred</th>
+      <th>@item.OneYearPred</th>
+      <th>@item.TwoYearPred</th>
+      <th>@item.FiveYearPred</th>
+    </tr>
+    }
+  </tbody>
+</table>

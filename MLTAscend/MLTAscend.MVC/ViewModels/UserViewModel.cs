@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dom = MLTAscend.Domain.Models;
 
 namespace MLTAscend.MVC.ViewModels
 {
@@ -27,6 +28,12 @@ namespace MLTAscend.MVC.ViewModels
       };
 
       return uh.SetUser(usr);
+    }
+
+    internal List<dom.Prediction> GetPredictions()
+    {
+      var ph = new PredictionHelper();
+      return ph.GetPredictions();
     }
   }
 }
