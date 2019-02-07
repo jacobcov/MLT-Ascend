@@ -26,7 +26,7 @@ namespace MLTAscend.MVC.Controllers
           // add to session
 
           return View("LoggedIn");
-        };
+        }
       }
       return View("../Home/_LogIn");
     }
@@ -47,7 +47,7 @@ namespace MLTAscend.MVC.Controllers
           // add to session
 
           return View("LoggedIn");
-        };
+        }
       }
       return View("../Home/_SignUp");
     }
