@@ -29,15 +29,13 @@ namespace MLTAscend.Tests.UnitTests
 
             };
 
-            sut.User = User;
-
             PredictonHelper = new dat.PredictionHelper();
         }
 
         [Fact]
         public void Test_SetPrediction()
         {
-            Assert.True(PredictonHelper.SetPrediction(sut));
+            Assert.True(PredictonHelper.SetPrediction(sut, User.Username));
         }
 
         [Fact]

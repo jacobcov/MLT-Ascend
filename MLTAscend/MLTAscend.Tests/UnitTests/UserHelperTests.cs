@@ -15,13 +15,6 @@ namespace MLTAscend.Tests.UnitTests
 
         public UserHelperTests()
         {
-            sut = new dom.User()
-            {
-                Name = "jim",
-                Username = "bob",
-                Password = "billy"
-            };
-
             ExistUser = new dom.User()
             {
                 Name = "fred",
@@ -33,12 +26,6 @@ namespace MLTAscend.Tests.UnitTests
         }
 
         [Fact]
-        public void Test_SetUser_Pass()
-        {
-            Assert.True(UserHelper.SetUser(sut));
-        }
-
-        [Fact]
         public void Test_SetUser_Fail()
         {
             Assert.False(UserHelper.SetUser(ExistUser));
@@ -47,9 +34,9 @@ namespace MLTAscend.Tests.UnitTests
         [Fact]
         public void Test_GetUserByUsername()
         {
-            var actual = UserHelper.GetUserByUsername(sut.Username);
+            var actual = UserHelper.GetUserByUsername(ExistUser.Username);
 
-            Assert.True(actual.Username == sut.Username);
+            Assert.True(actual.Username == ExistUser.Username);
         }
 
         [Fact]
@@ -67,7 +54,7 @@ namespace MLTAscend.Tests.UnitTests
             var actual = UserHelper.GetUsers();
 
             Assert.True(actual.Count > 0);
-            Assert.True(actual[6].Username == sut.Username);
+            Assert.True(actual[7].Username == ExistUser.Username);
         }
     }
 }
