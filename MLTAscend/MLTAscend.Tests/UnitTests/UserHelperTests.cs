@@ -54,7 +54,7 @@ namespace MLTAscend.Tests.UnitTests
             var actual = UserHelper.GetUsers();
 
             Assert.True(actual.Count > 0);
-            Assert.True(actual[7].Username == ExistUser.Username);
+            Assert.True(actual[1].Username == ExistUser.Username);
         }
     }
 }
