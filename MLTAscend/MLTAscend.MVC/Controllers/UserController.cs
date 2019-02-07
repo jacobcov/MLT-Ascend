@@ -54,7 +54,11 @@ namespace MLTAscend.MVC.Controllers
 
     public IActionResult Logs()
     {
-      return View("../User/Logs");
+      var uvm = new UserViewModel();
+
+      var log = uvm.GetPredictions();
+
+      return View("../User/Logs", log);
     }
   }
 }
