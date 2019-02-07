@@ -7,7 +7,7 @@
   ViewData["Title"] = "PredictionLog";
 }
 
-<table class="table">
+<table class="table is-striped is-hoverable">
   <thead>
     <tr>
       <th><abbr title="Position">Pos</abbr></th>
@@ -28,10 +28,10 @@
     @foreach (var item in Model.Predictions)
     {
     <tr>
-      <th>@Model.Predictions.IndexOf(item)</th>
+      <th>@(Model.Predictions.IndexOf(item)+1)</th>
       <th>@item.CompanyName</th>
       <th>@item.Ticker</th>
-      <th>@item.CreationDate</th>
+      <th>@item.CreationDate.ToShortDateString()</th>
       <th>@item.OneDayPred</th>
       <th>@item.OneWeekPred</th>
       <th>@item.OneMonthPred</th>
