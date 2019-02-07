@@ -22,7 +22,7 @@ namespace MLTAscend.MVC.Models
     [Required]
     [MinLength(4, ErrorMessage = "Must be at least 4 characters long")]
     [MaxLength(50, ErrorMessage = "Must be less than 50 characters")]
-    [PasswordChars(ErrorMessage = "Must only contain valid characters")]
+    [PasswordAttribute(ErrorMessage = "Must only contain valid characters")]
     public string Password { get; set; }
 
     [Required(ErrorMessage ="The Password field is required.")]
