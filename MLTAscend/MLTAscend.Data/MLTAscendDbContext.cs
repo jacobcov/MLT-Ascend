@@ -12,15 +12,15 @@ namespace MLTAscend.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Prediction> Predictions { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            builder.UseSqlServer("server=dotnet2019mason.database.windows.net;database=MLTAscendDB;user id=sqladmin; password=Florida2019;");
+            optionsBuilder.UseSqlServer("server=dotnet2019mason.database.windows.net;database=MLTAscendDB;user id=sqladmin; password=Florida2019;");
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<User>().HasKey(e => e.Id);
-            builder.Entity<Prediction>().HasKey(e => e.Id);
+            modelBuilder.Entity<User>().HasKey(e => e.Id);
+            modelBuilder.Entity<Prediction>().HasKey(e => e.Id);
         }
     }
 }

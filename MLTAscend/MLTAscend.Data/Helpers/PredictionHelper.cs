@@ -17,10 +17,19 @@ namespace MLTAscend.Data.Helpers
             return _db.Predictions.LastOrDefault(m => m.Ticker == ticker);
         }
 
-        public bool SetPrediction(dom.Prediction prediction)
+        public bool SetPrediction(dom.Prediction prediction, string username)
         {
+            var uh = new UserHelper();
+
             prediction.CreationDate = DateTime.Now;
-            _db.Predictions.Add(prediction);
+            var usr = uh.GetUserByUsername(username);
+            prediction.User = usr;
+
+            var e = _db.Entry<dom.Prediction>(prediction).Entity;
+
+            e.User = usr;
+            _db.Predictions.Attach(e).State = EntityState.Added;
+
             return _db.SaveChanges() > 0;
         }
 

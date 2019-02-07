@@ -21,5 +21,10 @@ namespace MLTAscend.Domain.Models
         public double OneYearPred { get; set; }
         public double TwoYearPred { get; set; }
         public double FiveYearPred { get; set; }
+
+        public Prediction()
+        {
+            User = new User();
+        }
     }
 }
