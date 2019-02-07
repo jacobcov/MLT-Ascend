@@ -30,6 +30,11 @@ namespace MLTAscend.MVC.Controllers
       return View("_SignUp");
     }
 
+    public IActionResult Logs()
+    {
+      return View("../User/Logs");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
