@@ -56,7 +56,10 @@ namespace MLTAscend.MVC.Controllers
     {
       var uvm = new UserViewModel();
 
-      var log = uvm.GetPredictions();
+      var log = new Log()
+      {
+        Predictions = uvm.GetPredictions()
+      };
 
       return View("../User/Logs", log);
     }
