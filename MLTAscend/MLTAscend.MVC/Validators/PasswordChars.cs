@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MLTAscend.MVC.Validators
 {
-  public class PasswordChars : ValidationAttribute
+  public class PasswordAttribute : ValidationAttribute
   {
     public override bool IsValid(object value)
     {
