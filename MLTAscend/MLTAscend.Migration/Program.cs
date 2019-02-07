@@ -4,7 +4,7 @@ namespace MLTAscend.Migration
 {
     class Program
     {
-        static void Main(string[] args)
+        protected static void Main(string[] args)
         {
         }
     }
