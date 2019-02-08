@@ -10,7 +10,7 @@ namespace MLTAscend.Data.Helpers
 {
     public class PredictionHelper
     {
-        private static MLTAscendDbContext _db = new MLTAscendDbContext();
+        private static MLTAscendDbContext _db = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
 
         public dom.Prediction GetPredictionByTicker(string ticker)
         {

@@ -8,7 +8,7 @@ namespace MLTAscend.Data.Helpers
 {
     public class UserHelper
     {
-        private static MLTAscendDbContext _db = new MLTAscendDbContext();
+        private static MLTAscendDbContext _db = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
 
         public dom.User GetUserByUsername(string username)
         {

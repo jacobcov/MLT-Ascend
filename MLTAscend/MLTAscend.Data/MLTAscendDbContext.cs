@@ -4,17 +4,24 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MLTAscend.Domain.Models;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.Extensions.Configuration;
 
 namespace MLTAscend.Data
 {
-    class MLTAscendDbContext : DbContext
+    public class MLTAscendDbContext : DbContext
     {
+        public MLTAscendDbContext(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
+        public static IConfiguration Configuration { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Prediction> Predictions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=dotnet2019mason.database.windows.net;database=MLTAscendDB;user id=sqladmin; password=Florida2019;");
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MLTAscendDatabase"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
