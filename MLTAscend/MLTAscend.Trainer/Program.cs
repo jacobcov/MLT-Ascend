@@ -11,7 +11,8 @@ namespace MLTAscend.Trainer
          Console.WriteLine("Hello World!");
          MLContext mlContext = new MLContext(seed: 1);
 
-         PredictionModelHelper.TrainAndSaveModel(mlContext, "Trainer/daily_MSFT.csv");
+         PredictionModelHelper.TrainAndSaveModel(mlContext, "Trainers/daily_MSFT.stats.csv");
+         PredictionModelHelper.TestPrediction(mlContext);
       }
    }
 }

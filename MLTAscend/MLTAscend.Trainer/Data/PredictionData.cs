@@ -9,22 +9,22 @@ namespace MLTAscend.Trainer.Data
    {
       // date,open,high,low,close,volume
       [LoadColumn(0)]
-      public DateTime date;
+      public string timestamp;
 
       [LoadColumn(1)]
-      public decimal open;
+      public double open;
 
       [LoadColumn(2)]
-      public decimal high;
+      public double high;
 
       [LoadColumn(3)]
-      public decimal low;
+      public double low;
 
       [LoadColumn(4)]
-      public decimal close;
+      public double close;
 
       [LoadColumn(5)]
-      public int volume;
+      public double volume;
 
    }
 
