@@ -23,18 +23,19 @@ namespace MLTAscend.Trainer.Trainers
 
       public static void CreatePredictionModelUsingPipeline(MLContext mlContext, string dataPath, string outputModelPath)
       {
-         var trainingDataView = mlContext.Data.ReadFromTextFile<PredictionData>(dataPath, hasHeader: true, separatorChar: ',');
+         var trainingDataView = mlContext.Data.ReadFromTextFile<PredictionData>(path: dataPath, hasHeader: true, separatorChar: ',');
 
-         var trainer = mlContext.Regression.Trainers.FastTreeTweedie("Label", "Features");
+         var trainer = mlContext.Regression.Trainers.FastTreeTweedie();
 
-         var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: "NumFeatures", inputColumnNames: new string[] { nameof(PredictionData.high), nameof(PredictionData.low), nameof(PredictionData.close), nameof(PredictionData.volume) })
-            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CatFeatures", inputColumnName: nameof(PredictionData.timestamp)))
-            .Append(mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "NumFeatures", "CatFeatures" }))
-            .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: nameof(PredictionData.open)))
+         var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: "NumFeatures", inputColumnNames: new string[] { nameof(PredictionData.open), nameof(PredictionData.high), nameof(PredictionData.low), nameof(PredictionData.close), nameof(PredictionData.volume) })
+              .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CatFeatures", inputColumnName: nameof(PredictionData.timestamp)))
+                   .Append(mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "CatFeatures", "NumFeatures" }))
+              .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: "next"))
             .Append(trainer);
 
          //Console.WriteLine("=============== Cross-validating to get model's accuracy metrics ===============");
-         //var crossValidationResults = mlContext.Regression.CrossValidate(data: trainingDataView, estimator: trainingPipeline, numFolds: 6, labelColumn: DefaultColumnNames.Label);
+         var crossValidationResults = mlContext.Regression.CrossValidate(data: trainingDataView, estimator: trainingPipeline, numFolds: 6, labelColumn: DefaultColumnNames.Label);
+         Console.WriteLine();
          //ConsoleHelper.PrintRegressionFoldsAverageMetrics(trainer.ToString(), crossValidationResults);
 
          // Train the model
@@ -59,16 +60,19 @@ namespace MLTAscend.Trainer.Trainers
          }
 
          var predictionEngine = trainedModel.CreatePredictionEngine<PredictionData, PredictionUnitForecast>(mlContext);
+         var pE = trainedModel.CreatePredictionEngine<PredictionData, PredictionUnitForecast>(mlContext);
 
          Console.WriteLine("** Testing Product 1 **");
+
+
 
          // Build sample data
          PredictionData dataSample = new PredictionData()
          {
-            open = 103.86,
-            high = 104.88,
-            low = 103.2445,
-            close = 104.27,
+            open = 103.86F,
+            high = 104.88F,
+            low = 103.2445F,
+            close = 104.27F,
             timestamp = "2019-01-09",
             volume = 32280840
          };
@@ -76,7 +80,10 @@ namespace MLTAscend.Trainer.Trainers
          // Predict the nextperiod/month forecast to the one provided
 
          PredictionUnitForecast prediction = predictionEngine.Predict(dataSample);
-         Console.WriteLine($"Product: {dataSample.open}, date: {"2019-01-10"}, yesterday's high: {dataSample.high} - Real value (units): 103.7500, Forecast Prediction (units): {prediction.next}");
+         PredictionUnitForecast p2 = pE.Predict(dataSample);
+         Console.WriteLine($"Product: {dataSample.open}, date: {"2019-01-10"}, yesterday's high: {dataSample.high} - Real value (units): 103.7500, Forecast Prediction (units): {prediction.score} , {p2.score}");
+         Console.WriteLine("done");
+         Console.ReadLine();
       }
    }
 }

@@ -12,20 +12,22 @@ namespace MLTAscend.Trainer.Data
       public string timestamp;
 
       [LoadColumn(1)]
-      public double open;
+      public float open;
 
       [LoadColumn(2)]
-      public double high;
+      public float high;
 
       [LoadColumn(3)]
-      public double low;
+      public float low;
 
       [LoadColumn(4)]
-      public double close;
+      public float close;
 
       [LoadColumn(5)]
-      public double volume;
+      public float volume;
 
+      [LoadColumn(6)]
+      public float next;
    }
 
    //public class ProductUnitPrediction
