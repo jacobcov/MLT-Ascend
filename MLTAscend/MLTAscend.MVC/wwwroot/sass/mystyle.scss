@@ -1,0 +1,66 @@
+﻿@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+$wine: #6B2737;
+$max-yellow-red: #E8C547;
+$tan: #D1B98A;
+$beige-light: #E6E7D5;
+$gunmetal-ter: #42444E;
+$gunmetal-bis: #30323d;
+$gunmetal: #282932;
+$eggshell: #939388;
+
+// Update Bulma's global variables
+$white: $gunmetal-bis;
+$white-bis: $gunmetal;
+$white-ter: $gunmetal-ter;
+$grey-lighter: hsl(0, 0%, 21%);
+$grey-light: hsl(0, 0%, 29%);
+$grey: hsl(0, 0%, 48%);
+$grey-dark: hsl(0, 0%, 71%);
+$grey-darker: hsl(0, 0%, 86%);
+$black-ter: hsl(0, 0%, 96%);
+$black-bis: hsl(0, 0%, 98%);
+$black: hsl(0, 0%, 100%);
+$family-sans-serif: "Nunito", sans-serif;
+$primary: $eggshell;
+$link: $max-yellow-red;
+
+// Update some of Bulma's component variables
+// form
+$control-border-width: 2px;
+$input-background-color: $eggshell;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// box
+$box-background-color: $white-ter;
+$box-shadow: 0 8px 8px rgba(hsl(0, 0%, 0%), 0.1), 0 0 0 1px rgba(hsl(0, 0%, 0%), 0.1);
+
+// card
+$card-color: #000;
+$card-shadow: 0 2px 3px rgba(hsl(0, 0%, 0%), 0.1), 0 0 0 1px rgba(hsl(0, 0%, 0%), 0.1);
+$card-header-shadow: 0 1px 2px rgba(#000, 0.1);
+
+// navbar
+$navbar-background-color: $gunmetal-ter;
+
+// footer
+$footer-padding: 2rem 1rem 2rem;
+
+// table
+$table-head-background-color: $gunmetal-bis;
+$table-striped-row-even-background-color: #454751;
+$table-striped-row-even-hover-background-color: $gunmetal;
+$table-background-color: transparent;
+
+// Import only what you need from Bulma
+@import "../bulma/sass/utilities/_all.sass";
+@import "../bulma/sass/base/_all.sass";
+@import "../bulma/sass/grid/_all.sass";
+@import "../bulma/sass/elements/_all.sass";
+@import "../bulma/sass/components/_all.sass";
+@import "../bulma/sass/layout/_all.sass";
