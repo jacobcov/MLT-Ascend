@@ -21,7 +21,7 @@ $('#companyName, #ticker, #date, #1d, #1w, #1mo, #3mo, #6mo, #1yr, #2yr, #5yr')
 
       }, function () {
 
-        return this.parentNode.parentNode;
+        return this.parentNode;
       });
 
       inverse = !inverse;
