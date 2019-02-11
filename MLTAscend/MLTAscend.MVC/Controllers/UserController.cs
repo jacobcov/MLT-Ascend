@@ -63,5 +63,10 @@ namespace MLTAscend.MVC.Controllers
 
       return View("../User/Logs", log);
     }
+
+    public IActionResult Ticker()
+    {
+      return View("../User/Ticker");
+    }
   }
 }
