@@ -328,3 +328,4 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/MLTAscend/MLTAscend.MVC/wwwroot/bulma
