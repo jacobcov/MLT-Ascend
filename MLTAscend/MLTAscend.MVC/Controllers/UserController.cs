@@ -61,6 +61,8 @@ namespace MLTAscend.MVC.Controllers
         Predictions = uvm.GetPredictions()
       };
 
+      log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
+
       return View("../User/Logs", log);
     }
   }
