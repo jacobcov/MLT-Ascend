@@ -26,7 +26,7 @@ namespace MLTAscend.MVC.Controllers
           // add to session
 
           return View("LoggedIn");
-        };
+        }
       }
       return View("../Home/_LogIn");
     }
@@ -47,9 +47,23 @@ namespace MLTAscend.MVC.Controllers
           // add to session
 
           return View("LoggedIn");
-        };
+        }
       }
       return View("../Home/_SignUp");
+    }
+
+    public IActionResult Logs()
+    {
+      var uvm = new UserViewModel();
+
+      var log = new Log()
+      {
+        Predictions = uvm.GetPredictions()
+      };
+
+      log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
+
+      return View("../User/Logs", log);
     }
   }
 }
