@@ -4,50 +4,44 @@
 @model MLTAscend.MVC.Models.Log
 
 @{
-  ViewData["Title"] = "PredictionLog";
+   ViewData["Title"] = "PredictionLog";
 }
 
 <div class="box">
-  <table class="table is-hoverable is-striped is-fullwidth">
-    <thead>
-      <tr>
-        <th id="date"><abbr title="Creation Date">Date</abbr></th>
-        <th id="companyName">Company Name</th>
-        <th id="ticker"><abbr title="Ticker">Tkr</abbr></th>
-        <th id="1d"><abbr title="One Day">1d</abbr></th>
-        <th id="1w"><abbr title="One Week">1w</abbr></th>
-        <th id="1mo"><abbr title="One Month">1mo</abbr></th>
-        <th id="3mo"><abbr title="Three Month">3mo</abbr></th>
-        <th id="6mo"><abbr title="Six Month">6mo</abbr></th>
-        <th id="1yr"><abbr title="One Year">1yr</abbr></th>
-        <th id="2yr"><abbr title="Two Year">2yr</abbr></th>
-        <th id="5yr"><abbr title="Five Year">5yr</abbr></th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var item in Model.Predictions)
-      {
-        <tr>
-          <td>@item.CreationDate.ToShortDateString()</td>
-          <td>@item.CompanyName</td>
-          <td>@item.Ticker</td>
-          <td>@item.OneDayPred</td>
-          <td>@item.OneWeekPred</td>
-          <td>@item.OneMonthPred</td>
-          <td>@item.ThreeMonthPred</td>
-          <td>@item.SixMonthPred</td>
-          <td>@item.OneYearPred</td>
-          <td>@item.TwoYearPred</td>
-          <td>@item.FiveYearPred</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+   <table class="table is-hoverable is-striped is-fullwidth">
+      <thead>
+         <tr>
+            <th id="date"><abbr title="Creation Date">Date</abbr></th>
+            <th id="companyName">Company Name</th>
+            <th id="ticker"><abbr title="Ticker">Tkr</abbr></th>
+            <th id="1d"><abbr title="One Day">1d</abbr></th>
+            <th id="1w"><abbr title="One Week">1w</abbr></th>
+            <th id="1mo"><abbr title="One Month">1mo</abbr></th>
+            <th id="3mo"><abbr title="Three Month">3mo</abbr></th>
+            <th id="1yr"><abbr title="One Year">1yr</abbr></th>
+         </tr>
+      </thead>
+      <tbody>
+         @foreach (var item in Model.Predictions)
+         {
+            <tr>
+               <td>@item.CreationDate.ToShortDateString()</td>
+               <td>@item.CompanyName</td>
+               <td>@item.Ticker</td>
+               <td>@item.OneDayPred</td>
+               <td>@item.OneWeekPred</td>
+               <td>@item.OneMonthPred</td>
+               <td>@item.ThreeMonthPred</td>
+               <td>@item.OneYearPred</td>
+            </tr>
+         }
+      </tbody>
+   </table>
 </div>
 
 @section Scripts
-  {
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-  <script src="https://rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
-  <script src="~/js/site.js"></script>
+   {
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+   <script src="https://rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
+   <script src="~/js/site.js"></script>
 }
