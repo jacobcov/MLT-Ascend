@@ -7,34 +7,27 @@ namespace MLTAscend.Trainer.Data
 {
    public class PredictionData
    {
-      // date,open,high,low,close,volume
-      private string _timestamp;
+      // date,open,high,low,close,volume, next
       [LoadColumn(0)]
-      public string timestamp { get { return _timestamp; } set { _timestamp = value; } }
+      public string timestamp { get; set; }
 
-      private float _open;
       [LoadColumn(1)]
-      public float open { get { return open; } set { open = value; } }
+      public float open { get; set; }
 
-      private float _high;
       [LoadColumn(2)]
-      public float high { get { return _high; } set { _high = value; } }
+      public float high { get; set; }
 
-      private float _low;
       [LoadColumn(3)]
-      public float low { get { return _low; } set { _low = value; } }
+      public float low { get; set; }
 
-      private float _close;
       [LoadColumn(4)]
-      public float close { get { return _close; } set { _close = value; } }
+      public float close { get; set; }
 
-      private float _volume;
       [LoadColumn(5)]
-      public float volume { get { return _volume; } set { _volume = value; } }
+      public float volume { get; set; }
 
-      private float _next;
       [LoadColumn(6)]
-      public float next { get { return _next; } set { _next = value; } }
+      public float next { get; set; }
 
    }
 }
