@@ -6,6 +6,6 @@ namespace MLTAscend.Trainer.Forecasts
 {
    public class PredictionUnitForecast
    {
-      public float score;
+      public float Score;
    }
 }

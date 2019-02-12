@@ -27,14 +27,14 @@ namespace MLTAscend.Trainer.Trainers
 
          var trainer = mlContext.Regression.Trainers.FastTreeTweedie();
 
-         var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: "NumFeatures", inputColumnNames: new string[] { nameof(PredictionData.open), nameof(PredictionData.high), nameof(PredictionData.low), nameof(PredictionData.close), nameof(PredictionData.volume) })
-              .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CatFeatures", inputColumnName: nameof(PredictionData.timestamp)))
-                   .Append(mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "CatFeatures", "NumFeatures" }))
-              .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: "next"))
+         var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { nameof(PredictionData.open), nameof(PredictionData.high), nameof(PredictionData.low), nameof(PredictionData.close), nameof(PredictionData.volume) })
+              // .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CatFeatures", inputColumnName: nameof(PredictionData.timestamp)))
+              //     .Append(mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "CatFeatures", "NumFeatures" }))
+              .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: nameof(PredictionData.next)))
             .Append(trainer);
 
          //Console.WriteLine("=============== Cross-validating to get model's accuracy metrics ===============");
-         var crossValidationResults = mlContext.Regression.CrossValidate(data: trainingDataView, estimator: trainingPipeline, numFolds: 6, labelColumn: DefaultColumnNames.Label);
+         //var crossValidationResults = mlContext.Regression.CrossValidate(data: trainingDataView, estimator: trainingPipeline, numFolds: 6, labelColumn: DefaultColumnNames.Label);
          Console.WriteLine();
          //ConsoleHelper.PrintRegressionFoldsAverageMetrics(trainer.ToString(), crossValidationResults);
 
@@ -81,7 +81,7 @@ namespace MLTAscend.Trainer.Trainers
 
          PredictionUnitForecast prediction = predictionEngine.Predict(dataSample);
          PredictionUnitForecast p2 = pE.Predict(dataSample);
-         Console.WriteLine($"Product: {dataSample.open}, date: {"2019-01-10"}, yesterday's high: {dataSample.high} - Real value (units): 103.7500, Forecast Prediction (units): {prediction.score} , {p2.score}");
+         Console.WriteLine($"Product: {dataSample.open}, date: {"2019-01-10"}, yesterday's high: {dataSample.high} - Real value (units): 103.7500, Forecast Prediction (units): {prediction.Score} , {p2.Score}");
          Console.WriteLine("done");
          Console.ReadLine();
       }
