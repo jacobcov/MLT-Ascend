@@ -28,15 +28,11 @@ namespace MLTAscend.Trainer.Trainers
          var trainer = mlContext.Regression.Trainers.FastTreeTweedie();
 
          var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { nameof(PredictionData.open), nameof(PredictionData.high), nameof(PredictionData.low), nameof(PredictionData.close), nameof(PredictionData.volume) })
-              // .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "CatFeatures", inputColumnName: nameof(PredictionData.timestamp)))
-              //     .Append(mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "CatFeatures", "NumFeatures" }))
+
               .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: nameof(PredictionData.next)))
             .Append(trainer);
 
-         //Console.WriteLine("=============== Cross-validating to get model's accuracy metrics ===============");
-         //var crossValidationResults = mlContext.Regression.CrossValidate(data: trainingDataView, estimator: trainingPipeline, numFolds: 6, labelColumn: DefaultColumnNames.Label);
          Console.WriteLine();
-         //ConsoleHelper.PrintRegressionFoldsAverageMetrics(trainer.ToString(), crossValidationResults);
 
          // Train the model
          var model = trainingPipeline.Fit(trainingDataView);

@@ -4,7 +4,7 @@ using System;
 
 namespace MLTAscend.Trainer
 {
-   class Program
+   static class Program
    {
       static void Main(string[] args)
       {

@@ -6,6 +6,7 @@ namespace MLTAscend.Trainer.Forecasts
 {
    public class PredictionUnitForecast
    {
-      public float Score;
+      private float _Score;
+      public float Score { get { return _Score; } set { _Score = value; } }
    }
 }
