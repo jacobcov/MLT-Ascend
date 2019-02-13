@@ -9,4 +9,12 @@
     <PackageReference Include="Microsoft.ML" Version="0.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MLTAscend.Domain\MLTAscend.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PredictionModels\" />
+  </ItemGroup>
+
 </Project>
