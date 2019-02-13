@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MLTAscend.Data.Migrations
 {
-    public partial class first_migration : Migration
+    public partial class second_migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,10 +38,7 @@ namespace MLTAscend.Data.Migrations
                     OneWeekPred = table.Column<double>(nullable: false),
                     OneMonthPred = table.Column<double>(nullable: false),
                     ThreeMonthPred = table.Column<double>(nullable: false),
-                    SixMonthPred = table.Column<double>(nullable: false),
-                    OneYearPred = table.Column<double>(nullable: false),
-                    TwoYearPred = table.Column<double>(nullable: false),
-                    FiveYearPred = table.Column<double>(nullable: false)
+                    OneYearPred = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
