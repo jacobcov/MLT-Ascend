@@ -13,4 +13,8 @@
     <ProjectReference Include="..\MLTAscend.Domain\MLTAscend.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PredictionModels\" />
+  </ItemGroup>
+
 </Project>

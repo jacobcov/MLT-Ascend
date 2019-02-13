@@ -2,10 +2,10 @@
 
 namespace MLTAscend.Migration
 {
-    static class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
+   static class Program
+   {
+      static void Main(string[] args)
+      {
+      }
+   }
 }
