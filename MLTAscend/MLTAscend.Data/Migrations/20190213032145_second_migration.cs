@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MLTAscend.Data.Migrations
 {
-    public partial class first_migration : Migration
+    public partial class second_migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MLTAscend.Data.Migrations
 {
     [DbContext(typeof(MLTAscendDbContext))]
-    [Migration("20190130021549_first_migration")]
-    partial class first_migration
+    [Migration("20190213032145_second_migration")]
+    partial class second_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
