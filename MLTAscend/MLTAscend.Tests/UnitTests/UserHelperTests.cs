@@ -9,7 +9,6 @@ namespace MLTAscend.Tests.UnitTests
 {
     public class UserHelperTests
     {
-        private dom.User sut;
         private dom.User ExistUser;
         public dat.UserHelper UserHelper { get; set; }
 

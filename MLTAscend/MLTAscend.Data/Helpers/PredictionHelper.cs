@@ -10,11 +10,32 @@ namespace MLTAscend.Data.Helpers
 {
     public class PredictionHelper
     {
-        private static MLTAscendDbContext _db = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+        public MLTAscendDbContext ExtContext { get; set; }
+        public InMemoryDbContext IntContext { get; set; }
+
+
+        public PredictionHelper()
+        {
+            ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+            IntContext = null;
+        }
+
+        public PredictionHelper(InMemoryDbContext context)
+        {
+            IntContext = context;
+            ExtContext = null;
+        }
 
         public dom.Prediction GetPredictionByTicker(string ticker)
         {
-            return _db.Predictions.LastOrDefault(m => m.Ticker == ticker);
+            if (ExtContext != null && IntContext == null)
+            {
+                return ExtContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+            }
+            else
+            {
+                return IntContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+            }
         }
 
         public bool SetPrediction(dom.Prediction prediction, string username)
@@ -25,17 +46,36 @@ namespace MLTAscend.Data.Helpers
             var usr = uh.GetUserByUsername(username);
             prediction.User = usr;
 
-            var e = _db.Entry<dom.Prediction>(prediction).Entity;
+            if (ExtContext != null && IntContext == null)
+            {
+                var e = ExtContext.Entry<dom.Prediction>(prediction).Entity;
 
-            e.User = usr;
-            _db.Predictions.Attach(e).State = EntityState.Added;
+                e.User = usr;
+                ExtContext.Predictions.Attach(e).State = EntityState.Added;
 
-            return _db.SaveChanges() > 0;
+                return ExtContext.SaveChanges() > 0;
+            }
+            else
+            {
+                var e = IntContext.Entry<dom.Prediction>(prediction).Entity;
+
+                e.User = usr;
+                IntContext.Predictions.Attach(e).State = EntityState.Added;
+
+                return IntContext.SaveChanges() > 0;
+            }
         }
 
         public List<dom.Prediction> GetPredictions()
         {
-            return _db.Predictions.ToList();
+            if (ExtContext != null && IntContext == null)
+            {
+                return ExtContext.Predictions.ToList();
+            }
+            else
+            {
+                return IntContext.Predictions.ToList();
+            }
         }
     }
 }
