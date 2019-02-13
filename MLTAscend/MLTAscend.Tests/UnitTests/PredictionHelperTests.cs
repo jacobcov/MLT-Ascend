@@ -34,7 +34,7 @@ namespace MLTAscend.Tests.UnitTests
             UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
 
             UserHelper.SetUser(User);
-            PredictonHelper.SetPrediction(sut, User.Username);
+            //PredictonHelper.SetPrediction(sut, User.Username);
         }
 
         [Fact]

@@ -44,10 +44,10 @@ namespace MLTAscend.Data.Helpers
 
             prediction.CreationDate = DateTime.Now;
             var usr = uh.GetUserByUsername(username);
-            prediction.User = usr;
 
             if (ExtContext != null && IntContext == null)
             {
+                prediction.User = usr;
                 var e = ExtContext.Entry<dom.Prediction>(prediction).Entity;
 
                 e.User = usr;
@@ -57,6 +57,13 @@ namespace MLTAscend.Data.Helpers
             }
             else
             {
+                dom.User User = new dom.User()
+                {
+                    Name = "jim",
+                    Username = "bob",
+                    Password = "jon"
+                };
+                prediction.User = User;
                 IntContext.Predictions.Add(prediction);
                 return IntContext.SaveChanges() > 0;
             }
