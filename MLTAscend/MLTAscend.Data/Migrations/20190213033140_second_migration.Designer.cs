@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MLTAscend.Data.Migrations
 {
     [DbContext(typeof(MLTAscendDbContext))]
-    [Migration("20190130021549_first_migration")]
-    partial class first_migration
+    [Migration("20190213033140_second_migration")]
+    partial class second_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,8 +31,6 @@ namespace MLTAscend.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<double>("FiveYearPred");
-
                     b.Property<double>("OneDayPred");
 
                     b.Property<double>("OneMonthPred");
@@ -41,13 +39,9 @@ namespace MLTAscend.Data.Migrations
 
                     b.Property<double>("OneYearPred");
 
-                    b.Property<double>("SixMonthPred");
-
                     b.Property<double>("ThreeMonthPred");
 
                     b.Property<string>("Ticker");
-
-                    b.Property<double>("TwoYearPred");
 
                     b.Property<int?>("UserId");
 

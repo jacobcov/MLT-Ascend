@@ -29,8 +29,6 @@ namespace MLTAscend.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<double>("FiveYearPred");
-
                     b.Property<double>("OneDayPred");
 
                     b.Property<double>("OneMonthPred");
@@ -39,13 +37,9 @@ namespace MLTAscend.Data.Migrations
 
                     b.Property<double>("OneYearPred");
 
-                    b.Property<double>("SixMonthPred");
-
                     b.Property<double>("ThreeMonthPred");
 
                     b.Property<string>("Ticker");
-
-                    b.Property<double>("TwoYearPred");
 
                     b.Property<int?>("UserId");
 
