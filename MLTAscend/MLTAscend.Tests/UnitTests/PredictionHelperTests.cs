@@ -12,14 +12,15 @@ namespace MLTAscend.Tests.UnitTests
         private dom.Prediction sut;
         private dom.User User;
         public dat.PredictionHelper PredictonHelper { get; set; }
+        public dat.UserHelper UserHelper { get; set; }
 
         public PredictionHelperTests()
         {
             User = new dom.User()
             {
-                Name = "fred",
-                Username = "belottef",
-                Password = "peoples"
+                Name = "anon",
+                Username = "anonymous",
+                Password = "password"
             };
 
             sut = new dom.Prediction()
@@ -29,7 +30,11 @@ namespace MLTAscend.Tests.UnitTests
 
             };
 
-            PredictonHelper = new dat.PredictionHelper();
+            PredictonHelper = new dat.PredictionHelper(new Data.InMemoryDbContext());
+            UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
+
+            UserHelper.SetUser(User);
+            PredictonHelper.SetPrediction(sut, User.Username);
         }
 
         [Fact]

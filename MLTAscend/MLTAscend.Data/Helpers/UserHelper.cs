@@ -8,11 +8,32 @@ namespace MLTAscend.Data.Helpers
 {
     public class UserHelper
     {
-        private static MLTAscendDbContext _db = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+        public MLTAscendDbContext ExtContext { get; set; }
+        public InMemoryDbContext IntContext { get; set; }
+
+
+        public UserHelper()
+        {
+            ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+            IntContext = null;
+        }
+
+        public UserHelper(InMemoryDbContext context)
+        {
+            IntContext = context;
+            ExtContext = null;
+        }
 
         public dom.User GetUserByUsername(string username)
         {
-            return _db.Users.FirstOrDefault(m => m.Username == username);
+            if (ExtContext != null && IntContext == null)
+            {
+                return ExtContext.Users.FirstOrDefault(m => m.Username == username);
+            }
+            else
+            {
+                return IntContext.Users.FirstOrDefault(m => m.Username == username);
+            }
         }
 
         public bool SetUser(dom.User user)
@@ -25,19 +46,41 @@ namespace MLTAscend.Data.Helpers
             else
             {
                 user.CreationDate = DateTime.Now;
-                _db.Users.Add(user);
-                return _db.SaveChanges() > 0;
+                if (ExtContext != null && IntContext == null)
+                {
+                    ExtContext.Users.Add(user);
+                    return ExtContext.SaveChanges() > 0;
+                }
+                else
+                {
+                    IntContext.Users.Add(user);
+                    return IntContext.SaveChanges() > 0;
+                }
             }
         }
 
         public List<dom.Prediction> GetUserPredictions(string username)
         {
-            return _db.Predictions.Where(m => m.User.Username == username).ToList();
+            if (ExtContext != null && IntContext == null)
+            {
+                return ExtContext.Predictions.Where(m => m.User.Username == username).ToList();
+            }
+            else
+            {
+                return IntContext.Predictions.Where(m => m.User.Username == username).ToList();
+            }
         }
 
         public List<dom.User> GetUsers()
         {
-            return _db.Users.ToList();
+            if (ExtContext != null && IntContext == null)
+            {
+                return ExtContext.Users.ToList();
+            }
+            else
+            {
+                return IntContext.Users.ToList();
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MLTAscend.Data.Helpers
 
         public bool SetPrediction(dom.Prediction prediction, string username)
         {
-            var uh = new UserHelper();
+            var uh = new UserHelper(new InMemoryDbContext());
 
             prediction.CreationDate = DateTime.Now;
             var usr = uh.GetUserByUsername(username);
@@ -57,11 +57,7 @@ namespace MLTAscend.Data.Helpers
             }
             else
             {
-                var e = IntContext.Entry<dom.Prediction>(prediction).Entity;
-
-                e.User = usr;
-                IntContext.Predictions.Attach(e).State = EntityState.Added;
-
+                IntContext.Predictions.Add(prediction);
                 return IntContext.SaveChanges() > 0;
             }
         }
