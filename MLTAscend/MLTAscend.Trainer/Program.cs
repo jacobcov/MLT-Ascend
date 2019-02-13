@@ -1,5 +1,5 @@
 ﻿using Microsoft.ML;
-using MLTAscend.Trainer.DataModels;
+using MLTAscend.Domain.DataModels;
 using MLTAscend.Trainer.Trainers;
 using System;
 
@@ -23,7 +23,7 @@ namespace MLTAscend.Trainer
          };
 
          PredictionModelHelper.TrainAndSaveModel(mlContext, "../../../Trainers/daily_MSFT.stats.csv");
-         PredictionModelHelper.RunPrediction(mlContext, dataSample);
+         PredictionModelHelper.TestPrediction(mlContext, dataSample);
          Console.ReadLine();
       }
    }

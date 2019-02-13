@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLTAscend.Trainer.DataModels
+namespace MLTAscend.Domain.DataModels
 {
    public class PredictionResult
    {

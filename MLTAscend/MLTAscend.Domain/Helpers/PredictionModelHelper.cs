@@ -1,43 +1,15 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Core.Data;
-using Microsoft.ML.Data;
 using MLTAscend.Domain.DataModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace MLTAscend.Trainer.Trainers
+namespace MLTAscend.Domain.Helpers
 {
-   public static class PredictionModelHelper
+   class PredictionModelHelper
    {
-      public static void TrainAndSaveModel(MLContext mlContext, string dataPath, string outputModelPath = "prediction_model.zip")
-      {
-         if (File.Exists(outputModelPath))
-         {
-            File.Delete(outputModelPath);
-         }
-         CreatePredictionModelUsingPipeline(mlContext, dataPath, outputModelPath);
-      }
-
-      public static void CreatePredictionModelUsingPipeline(MLContext mlContext, string dataPath, string outputModelPath)
-      {
-         var trainingDataView = mlContext.Data.ReadFromTextFile<StockData>(path: dataPath, hasHeader: true, separatorChar: ',');
-
-         var trainer = mlContext.Regression.Trainers.FastTreeTweedie();
-
-         var trainingPipeline = mlContext.Transforms.Concatenate(outputColumnName: DefaultColumnNames.Features, inputColumnNames: new string[] { "open", "high", "low", "close", "volume" })
-               .Append(mlContext.Transforms.CopyColumns(outputColumnName: DefaultColumnNames.Label, inputColumnName: "next"))
-               .Append(trainer);
-
-         // Train the model
-         var model = trainingPipeline.Fit(trainingDataView);
-
-         // Save the model for later comsumption from end-user apps
-         using (var file = File.OpenWrite(outputModelPath))
-            model.SaveTo(mlContext, file);
-      }
-
       public static PredictionResult TestPrediction(MLContext mlContext, StockData input, string outputModelPath = "prediction_model.zip")
       {
          Console.WriteLine("Testing Product Unit Sales Forecast model");
