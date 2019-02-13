@@ -9,8 +9,11 @@ namespace MLTAscend.Tests.UnitTests
 {
     public class UserHelperTests
     {
+        private dom.User sut { get; set; }
         private dom.User ExistUser;
+        private dom.Prediction pr;
         public dat.UserHelper UserHelper { get; set; }
+        public dat.PredictionHelper ph { get; set; }
 
         public UserHelperTests()
         {
@@ -21,13 +24,35 @@ namespace MLTAscend.Tests.UnitTests
                 Password = "peoples"
             };
 
-            UserHelper = new dat.UserHelper();
+            sut = new dom.User()
+            {
+                Name = "john",
+                Username = "jacob",
+                Password = "jingle"
+            };
+
+            pr = new dom.Prediction()
+            {
+                Ticker = "ryry"
+            };
+
+            UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
+            ph = new dat.PredictionHelper(new Data.InMemoryDbContext());
+
+            UserHelper.SetUser(ExistUser);
+            ph.SetPrediction(pr, ExistUser.Username);
         }
 
         [Fact]
         public void Test_SetUser_Fail()
         {
             Assert.False(UserHelper.SetUser(ExistUser));
+        }
+
+        [Fact]
+        public void Test_SetUser_Succeed()
+        {
+            Assert.True(UserHelper.SetUser(sut));
         }
 
         [Fact]
@@ -53,7 +78,7 @@ namespace MLTAscend.Tests.UnitTests
             var actual = UserHelper.GetUsers();
 
             Assert.True(actual.Count > 0);
-            Assert.True(actual[1].Username == ExistUser.Username);
+            Assert.True(actual[0].Username == ExistUser.Username);
         }
     }
 }

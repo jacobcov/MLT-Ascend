@@ -13,7 +13,6 @@ namespace MLTAscend.Data.Helpers
         public MLTAscendDbContext ExtContext { get; set; }
         public InMemoryDbContext IntContext { get; set; }
 
-
         public PredictionHelper()
         {
             ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
@@ -40,13 +39,13 @@ namespace MLTAscend.Data.Helpers
 
         public bool SetPrediction(dom.Prediction prediction, string username)
         {
-            var uh = new UserHelper(new InMemoryDbContext());
-
             prediction.CreationDate = DateTime.Now;
-            var usr = uh.GetUserByUsername(username);
 
             if (ExtContext != null && IntContext == null)
             {
+                UserHelper uh = new UserHelper();
+
+                var usr = uh.GetUserByUsername(username);
                 prediction.User = usr;
                 var e = ExtContext.Entry<dom.Prediction>(prediction).Entity;
 
@@ -57,14 +56,15 @@ namespace MLTAscend.Data.Helpers
             }
             else
             {
-                dom.User User = new dom.User()
-                {
-                    Name = "jim",
-                    Username = "bob",
-                    Password = "jon"
-                };
-                prediction.User = User;
-                IntContext.Predictions.Add(prediction);
+                var uh = new UserHelper(new InMemoryDbContext());
+
+                var us = uh.GetUserByUsername(username);
+                prediction.User = us;
+
+                var e = IntContext.Entry<dom.Prediction>(prediction).Entity;
+
+                e.User = us;
+                IntContext.Predictions.Attach(e).State = EntityState.Added;
                 return IntContext.SaveChanges() > 0;
             }
         }

@@ -13,6 +13,7 @@ namespace MLTAscend.Tests.UnitTests
         private dom.User User;
         public dat.PredictionHelper PredictonHelper { get; set; }
         public dat.UserHelper UserHelper { get; set; }
+        public dom.Prediction Pred;
 
         public PredictionHelperTests()
         {
@@ -21,6 +22,11 @@ namespace MLTAscend.Tests.UnitTests
                 Name = "anon",
                 Username = "anonymous",
                 Password = "password"
+            };
+
+            Pred = new dom.Prediction()
+            {
+                Ticker = "ryry"
             };
 
             sut = new dom.Prediction()
@@ -34,7 +40,7 @@ namespace MLTAscend.Tests.UnitTests
             UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
 
             UserHelper.SetUser(User);
-            //PredictonHelper.SetPrediction(sut, User.Username);
+            PredictonHelper.SetPrediction(Pred, User.Username);
         }
 
         [Fact]

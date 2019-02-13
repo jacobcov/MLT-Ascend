@@ -11,7 +11,6 @@ namespace MLTAscend.Data.Helpers
         public MLTAscendDbContext ExtContext { get; set; }
         public InMemoryDbContext IntContext { get; set; }
 
-
         public UserHelper()
         {
             ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
