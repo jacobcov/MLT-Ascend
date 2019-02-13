@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MLTAscend.Trainer.Forecasts
+namespace MLTAscend.Trainer.DataModels
 {
-   public class PredictionUnitForecast
+   public class PredictionResult
    {
       public float Score { get; set; }
    }

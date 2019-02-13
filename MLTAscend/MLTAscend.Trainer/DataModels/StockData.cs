@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.ML.Data;
 
-namespace MLTAscend.Trainer.Data
+namespace MLTAscend.Trainer.DataModels
 {
-   public class PredictionData
+   public class StockData
    {
       // date,open,high,low,close,volume, next
       [LoadColumn(0)]
