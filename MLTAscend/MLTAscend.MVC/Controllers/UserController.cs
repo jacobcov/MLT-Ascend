@@ -43,7 +43,7 @@ namespace MLTAscend.MVC.Controllers
         {
           uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
 
-          var user = uvm.GetUsers().Find(u => u.Username == signUp.Username);
+          // get user from db
           // add to session
 
           return View("LoggedIn");
