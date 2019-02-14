@@ -1,10 +1,27 @@
-﻿fetch('https://www.alphavantage.co/query?function=SMA&symbol=irbt&interval=daily&time_period=10&series_type=close&apikey=8YPLUQI35GBY540Q')
-  .then(response => {
-    if (response.ok) {
-      return response.json()
-    } else {
-      return Promise.reject('something went wrong!')
-    }
-  })
-  .then(data => console.log('data is', data))
-  .catch(error => console.log('error is', error));
+﻿var button = $('#getTicker');
+
+button.click(function () {
+  var symbol = $('#symbol').val();
+  var date = $('#date').val();
+
+  var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + symbol + '&outputsize=full&datatype=json&apikey=8YPLUQI35GBY540Q';
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject('something went wrong!');
+      }
+    })
+    .then(data => {
+      var daily = data["Time Series (Daily)"];
+      console.log(daily[date]["1. open"]);
+      console.log(daily[date]["2. high"]);
+      console.log(daily[date]["3. low"]);
+      console.log(daily[date]["4. close"]);
+      console.log(daily[date]["5. volume"]);
+      var customVal = $("#customInput").data("value");
+    })
+    .catch(error => console.log('error is', error));
+})
