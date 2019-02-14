@@ -13,8 +13,9 @@ namespace MLTAscend.Tests.UnitTests
     {
         public StockData dat { get; set; }
         public MLContext mlc { get; set; }
-        public string OutPath { get; set; }
+        public string OutPathTP { get; set; }
         public string DatPath { get; set; }
+        public string OutPathTasm { get; set; }
         public string OutModelPath { get; set; }
 
         public PredictionModelTrainerTests()
@@ -30,8 +31,9 @@ namespace MLTAscend.Tests.UnitTests
             };
 
             mlc = new MLContext();
-            OutPath = "../../../../MLTAscend.Trainer/PredictionModels/OneDayPred_model.zip";
+            OutPathTP = "../../../../MLTAscend.Trainer/PredictionModels/OneDayPred_model.zip";
             DatPath = "../../../../MLTAscend.Trainer/Data/daily_MSFT.csv";
+            OutPathTasm = "../../../../MLTAscend.Trainer/PredictionModels/OneDayPred_modeltasm.zip";
         }
 
 
@@ -39,15 +41,15 @@ namespace MLTAscend.Tests.UnitTests
         [Fact]
         public void Test_TrainAndSaveModel()
         {
-            PredictionModelTrainer.TrainAndSaveModel(mlc, DatPath, OutPath);
+            PredictionModelTrainer.TrainAndSaveModel(mlc, DatPath, OutPathTasm);
 
-            Assert.True(File.Exists(OutPath));
+            Assert.True(File.Exists(OutPathTasm));
         }
 
         [Fact]
         public void Test_TestPrediction()
         {
-            Assert.True(PredictionModelTrainer.TestPrediction(mlc, dat, OutPath).Score > 0);
+            Assert.True(PredictionModelTrainer.TestPrediction(mlc, dat, OutPathTP).Score > 0);
         }
     }
 }
