@@ -1,0 +1,45 @@
+﻿@*
+   For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MLTAscend.Domain.Models.Prediction
+<div id="chart_div"></div>
+
+
+@section scripts{
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+   <script>
+      google.charts.load('current', { packages: ['corechart', 'line'] });
+      google.charts.setOnLoadCallback(drawBasic);
+
+
+
+      function drawBasic() {
+
+         var data = new google.visualization.DataTable();
+         data.addColumn('number', 'Date');
+         data.addColumn('number', 'MSFT');
+         @{ var p = Model;}
+         data.addRows([
+            [0,100],[1,@p.OneDayPred],[7,@p.OneWeekPred],[30,@p.OneMonthPred],[90,@p.ThreeMonthPred],[360,@p.OneYearPred]
+         ]);
+
+         var options = {
+            hAxis: {
+               title: 'Date'
+            },
+            vAxis: {
+               title: 'Price'
+            },
+            pointsVisible: true,
+            pointSize: 2
+         };
+
+         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+         chart.draw(data, options);
+      }
+   </script>
+
+}
