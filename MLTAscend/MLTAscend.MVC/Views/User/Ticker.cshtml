@@ -1,15 +1,42 @@
-﻿
+﻿@model MLTAscend.MVC.Models.Ticker
+
 @{
   ViewData["Title"] = "Ticker";
 }
 
 <div class="box">
+  @*@using (Html.BeginForm("Ticker", "User"))
+  {*@
+    <div class="field">
+      @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
+      <div class="control">
+        @Html.TextBoxFor(m => m.Symbol, new { @class = "input", @id = "symbol" })
+      </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Symbol)</p>
+    </div>
+    <div class="field">
+      @Html.LabelFor(m => m.Date, "Date", new { @class = "label" })
+      <div class="control">
+        @Html.TextBoxFor(m => m.Date, new { @class = "input", @id = "date" })
+      </div>
+      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Date)</p>
+    </div>
+    <div class="control">
+      <button type="button" class="button is-primary" id="getTicker">Get Info</button>
+    </div>
+  @*}*@
 </div>
+
+<input type="hidden" id="open" data-value="@ViewBag.open" />
+<input type="hidden" id="high" data-value="@ViewBag.high" />
+<input type="hidden" id="low" data-value="@ViewBag.low" />
+<input type="hidden" id="close" data-value="@ViewBag.close" />
+<input type="hidden" id="volume" data-value="@ViewBag.volume" />
 
 @section Scripts
   {
-  <script src="~/js/ticker.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+  <script src="~/js/ticker.js"></script>
 }
