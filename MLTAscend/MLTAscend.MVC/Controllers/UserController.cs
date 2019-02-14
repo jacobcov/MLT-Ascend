@@ -52,7 +52,8 @@ namespace MLTAscend.MVC.Controllers
       return View("../Home/_SignUp");
     }
 
-    public IActionResult Logs()
+    [Route("[controller]/Logs/{sort?}")]
+    public IActionResult Logs(string sort)
     {
       var uvm = new UserViewModel();
 
@@ -60,9 +61,60 @@ namespace MLTAscend.MVC.Controllers
       {
         Predictions = uvm.GetPredictions()
       };
+      
+      if(TempData["inverse"] == null)
+      {
+        TempData["inverse"] = false;
+      }
 
-      log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
+      var inverse = (bool)TempData["inverse"];
 
+      switch (sort)
+      {
+        case "CreationDate":
+          if (inverse)
+          {
+            log.Predictions.Sort((x, y) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          else
+          {
+            log.Predictions.Sort((y, x) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          TempData["inverse"] = !inverse;
+          break;
+        case "CompanyName":
+        case "Ticker":
+          if (inverse)
+          {
+            log.Predictions.Sort((x, y) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          else
+          {
+            log.Predictions.Sort((y, x) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          TempData["inverse"] = !inverse;
+          break;
+        case "OneDayPred":
+        case "OneWeekPred":
+        case "OneMonthPred":
+        case "ThreeMonthPred":
+        case "OneYearPred":
+          if (inverse)
+          {
+            log.Predictions.Sort((x, y) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          else
+          {
+            log.Predictions.Sort((y, x) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
+          }
+          TempData["inverse"] = !inverse;
+          break;
+        default:
+          log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
+          TempData["inverse"] = !inverse;
+          break;
+      }
+      
       return View("../User/Logs", log);
     }
   }
