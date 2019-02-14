@@ -14,12 +14,12 @@ namespace MLTAscend.Trainer
 
          StockData dataSample = new StockData()
          {
-            open = 35.01F,
-            high = 35.65F,
-            low = 34.88F,
-            close = 35.48F,
-            timestamp = "2006-06-20",
-            volume = 4465500
+            open = 47F,
+            high = 47.1339F,
+            low = 46.2399F,
+            close = 47.01F,
+            timestamp = "2015-01-26",
+            volume = 42525530
          };
          var path = "../../../PredictionModels/OneDayPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/OneDayData.csv", path);
