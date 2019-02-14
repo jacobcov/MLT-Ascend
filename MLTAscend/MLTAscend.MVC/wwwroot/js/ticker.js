@@ -21,7 +21,6 @@ button.click(function () {
       console.log(daily[date]["3. low"]);
       console.log(daily[date]["4. close"]);
       console.log(daily[date]["5. volume"]);
-      var customVal = $("#customInput").data("value");
     })
     .catch(error => console.log('error is', error));
 })
