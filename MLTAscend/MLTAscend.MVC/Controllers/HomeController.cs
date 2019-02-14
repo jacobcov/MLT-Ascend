@@ -32,7 +32,7 @@ namespace MLTAscend.MVC.Controllers
 
     public IActionResult Logs()
     {
-      return View("../User/Logs");
+      return RedirectToAction("User", "Logs");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

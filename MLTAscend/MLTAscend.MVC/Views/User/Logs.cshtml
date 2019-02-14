@@ -11,14 +11,14 @@
    <table class="table is-hoverable is-striped is-fullwidth">
       <thead>
          <tr>
-            <th id="date"><abbr title="Creation Date">Date</abbr></th>
-            <th id="companyName">Company Name</th>
-            <th id="ticker"><abbr title="Ticker">Tkr</abbr></th>
-            <th id="1d"><abbr title="One Day">1d</abbr></th>
-            <th id="1w"><abbr title="One Week">1w</abbr></th>
-            <th id="1mo"><abbr title="One Month">1mo</abbr></th>
-            <th id="3mo"><abbr title="Three Month">3mo</abbr></th>
-            <th id="1yr"><abbr title="One Year">1yr</abbr></th>
+            <th id="date"><a asp-action="Logs" asp-controller="User" asp-route-sort="CreationDate"><abbr title="Creation Date">Date</abbr></a></th>
+            <th id="companyName"><a asp-action="Logs" asp-controller="User" asp-route-sort="CompanyName">Company Name</a></th>
+            <th id="ticker"><a asp-action="Logs" asp-controller="User" asp-route-sort="Ticker"><abbr title="Ticker">Tkr</abbr></a></th>
+            <th id="1d"><a asp-action="Logs" asp-controller="User" asp-route-sort="OneDayPred"><abbr title="One Day">1d</abbr></a></th>
+            <th id="1w"><a asp-action="Logs" asp-controller="User" asp-route-sort="OneWeekPred"><abbr title="One Week">1w</abbr></a></th>
+            <th id="1mo"><a asp-action="Logs" asp-controller="User" asp-route-sort="OneMonthPred"><abbr title="One Month">1mo</abbr></a></th>
+            <th id="3mo"><a asp-action="Logs" asp-controller="User" asp-route-sort="ThreeMonthPred"><abbr title="Three Month">3mo</abbr></a></th>
+            <th id="1yr"><a asp-action="Logs" asp-controller="User" asp-route-sort="OneYearPred"><abbr title="One Year">1yr</abbr></a></th>
          </tr>
       </thead>
       <tbody>
@@ -42,6 +42,4 @@
 @section Scripts
    {
    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-   <script src="https://rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
-   <script src="~/js/site.js"></script>
 }
