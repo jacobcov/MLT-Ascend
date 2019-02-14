@@ -17,14 +17,6 @@ namespace MLTAscend.Domain.Models
         public double OneWeekPred { get; set; }
         public double OneMonthPred { get; set; }
         public double ThreeMonthPred { get; set; }
-        public double SixMonthPred { get; set; }
         public double OneYearPred { get; set; }
-        public double TwoYearPred { get; set; }
-        public double FiveYearPred { get; set; }
-
-        public Prediction()
-        {
-            User = new User();
-        }
     }
 }

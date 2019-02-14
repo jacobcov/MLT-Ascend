@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MLTAscend.Data\MLTAscend.Data.csproj" />
     <ProjectReference Include="..\MLTAscend.Domain\MLTAscend.Domain.csproj" />
+    <ProjectReference Include="..\MLTAscend.Trainer\MLTAscend.Trainer.csproj" />
   </ItemGroup>
 
 </Project>

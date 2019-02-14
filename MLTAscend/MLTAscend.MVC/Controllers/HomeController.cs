@@ -32,7 +32,7 @@ namespace MLTAscend.MVC.Controllers
 
     public IActionResult Logs()
     {
-      return View("../User/Logs");
+      return RedirectToAction("User", "Logs");
     }
 
     public IActionResult Ticker()

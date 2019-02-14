@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello Bulma!</title>
-  <link rel="stylesheet" href="~/css/bulma.css">
+  <title>Ascend</title>
+  <link rel="stylesheet" href="~/css/mystyle.css">
+  <link rel="icon" href="~/images/favicon.ico">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" asp-controller="Home" asp-action="Index">
-          <img src="~/images/Ascend.png" alt="Ascend" width="112" height="28">
+          <img src="~/images/AscendLogo.png" alt="Ascend" width="112" height="28">
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -27,24 +28,13 @@
           <a class="navbar-item" asp-controller="User" asp-action="Logs"><strong>Logs</strong></a>
           <a class="navbar-item" asp-controller="Home" asp-action="Ticker"><strong>Ticker</strong></a>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">More</a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-              <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-              <a class="navbar-item">Contact</a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">Report an issue</a>
-            </div>
-          </div>
         </div>
 
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
               <a class="button is-primary" asp-controller="Home" asp-action="SignUp"><strong>Sign up</strong></a>
-              <a class="button is-light" asp-controller="Home" asp-action="LogIn">Log in</a>
+              <a class="button is-primary" asp-controller="Home" asp-action="LogIn"><strong>Log in</strong></a>
             </div>
           </div>
         </div>
