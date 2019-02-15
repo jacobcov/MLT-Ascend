@@ -7,23 +7,32 @@ Our goal: create an easy to use system with the ability to reveal lucrative oppo
 
 - Front-end will use MVC(with Bulma for styling)
 - Use of a sorting algorithm, to allow the User to filter by column category. 
-- Using .NET Core, ML.Net, and other aspects of Microsoft’s Machine Learning suite
+- Using .NET Core and ML.NET
 - Using historical stock market data from an API to make active predictions
 - T-SQL to store user predictions.
 
 
-# Technologies Used (Thus far)
+# Technologies Used
 
 - C#
 - .NET Core
 - ASP.NET (MVC)
 - T-SQL
+- Microsoft SQL Server
 - Entity Framework
 - ML.NET
 - HTML
-- CSS (Bulma)
+- CSS
+- SASS
+- Bulma
 - Javascript
+- JQuery
 - AlphaVantage API
+- IEX Trading API
+- Azure DevOps
+- Azure App Services
+- Azure SQL Database
+
 
 # Maintainers
 
