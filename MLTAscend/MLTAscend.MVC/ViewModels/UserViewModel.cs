@@ -1,16 +1,17 @@
 ﻿using MLTAscend.Data.Helpers;
-using pdm = MLTAscend.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dom = MLTAscend.Domain.Models;
+using dmt = MLTAscend.Domain.DataModels;
+using MLTAscend.MVC.Models;
 
 namespace MLTAscend.MVC.ViewModels
 {
   public class UserViewModel
   {
-    public List<pdm.User> GetUsers()
+    public List<dom.User> GetUsers()
     {
       var uh = new UserHelper();
       return uh.GetUsers();
@@ -20,7 +21,7 @@ namespace MLTAscend.MVC.ViewModels
     {
       var uh = new UserHelper();
 
-      var usr = new pdm.User()
+      var usr = new dom.User()
       {
         Name = name,
         Username = username,
@@ -34,6 +35,21 @@ namespace MLTAscend.MVC.ViewModels
     {
       var ph = new PredictionHelper();
       return ph.GetPredictions();
+    }
+
+    internal bool CreateStockData(Symbol ticker)
+    {
+      var stock = new dmt.StockData()
+      {
+        timestamp = ticker.Date,
+        open = (float)ticker.Open,
+        high = (float)ticker.High,
+        low = (float)ticker.Low,
+        close = (float)ticker.Close,
+        volume = ticker.Volume
+      };
+
+      return true;
     }
   }
 }
