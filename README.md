@@ -23,7 +23,7 @@ Our goal: create an easy to use system with the ability to reveal lucrative oppo
 - ML.NET
 - HTML
 - CSS
-- SASS
+- Sass
 - Bulma
 - Javascript
 - JQuery
