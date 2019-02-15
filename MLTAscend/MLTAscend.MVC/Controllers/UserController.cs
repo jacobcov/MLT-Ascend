@@ -130,11 +130,17 @@ namespace MLTAscend.MVC.Controllers
 
     public async Task<IActionResult> Ticker(Ticker ticker)
     {
+      var uvm = new UserViewModel();
+
       var _data = await GetTickerData(ticker);
       ViewBag.tickerData = _data;
 
       var _dayData = _data.FirstOrDefault(d => d.Date == ticker.Date);
+      _dayData.CompanyName = await GetCompanyName(ticker);
+      _dayData.Ticker = ticker.Symbol;
       ViewBag.tickerDay = _dayData;
+
+      uvm.CreateStockData(_dayData);
 
       return View("../User/Ticker");
     }
@@ -152,6 +158,26 @@ namespace MLTAscend.MVC.Controllers
         var tickerData = JsonConvert.DeserializeObject<IEnumerable<Symbol>>(responseBody);
 
         return tickerData;
+      }
+      catch (HttpRequestException e)
+      {
+        throw e;
+      }
+    }
+
+    public async Task<string> GetCompanyName(Ticker ticker)
+    {
+      try
+      {
+        var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/company?filter=companyName";
+
+        HttpResponseMessage response = await HttpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        var responseBody = await response.Content.ReadAsStringAsync();
+
+        var companyName = JsonConvert.DeserializeAnonymousType(responseBody, new { companyName = "" }).companyName;
+
+        return companyName;
       }
       catch (HttpRequestException e)
       {
