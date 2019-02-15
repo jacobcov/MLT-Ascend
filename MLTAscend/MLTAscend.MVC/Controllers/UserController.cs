@@ -43,7 +43,7 @@ namespace MLTAscend.MVC.Controllers
         {
           uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
 
-          var user = uvm.GetUsers().Find(u => u.Username == signUp.Username);
+          // get user from db
           // add to session
 
           return View("LoggedIn");
@@ -116,6 +116,12 @@ namespace MLTAscend.MVC.Controllers
       }
       
       return View("../User/Logs", log);
+    }
+
+    public IActionResult Ticker(Ticker ticker)
+    {
+
+      return View("../User/Ticker");
     }
   }
 }
