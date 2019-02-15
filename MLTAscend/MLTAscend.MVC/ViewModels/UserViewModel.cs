@@ -1,4 +1,5 @@
 ﻿using MLTAscend.Data.Helpers;
+using MLTAscend.Domain.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,9 @@ namespace MLTAscend.MVC.ViewModels
 
     internal bool CreateStockData(Symbol ticker)
     {
-      var stock = new dmt.StockData()
+      var ph = new PredictionHelper();
+
+      var stockData = new dmt.StockData()
       {
         timestamp = ticker.Date,
         open = (float)ticker.Open,
@@ -49,7 +52,11 @@ namespace MLTAscend.MVC.ViewModels
         volume = ticker.Volume
       };
 
-      return true;
+      var prediction = PredictionModelHelper.RunAllPredictions(stockData);
+      prediction.CompanyName = ticker.CompanyName;
+      prediction.Ticker = ticker.Ticker;
+            
+      return ph.SetPrediction(prediction, "fred");
     }
   }
 }
