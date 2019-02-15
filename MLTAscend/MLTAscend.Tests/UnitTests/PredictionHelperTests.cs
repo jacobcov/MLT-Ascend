@@ -11,7 +11,7 @@ namespace MLTAscend.Tests.UnitTests
     {
         private dom.Prediction sut;
         private dom.User User;
-        public dat.PredictionHelper PredictonHelper { get; set; }
+        public dat.PredictionHelper PredictionHelper { get; set; }
 
         public PredictionHelperTests()
         {
@@ -29,19 +29,19 @@ namespace MLTAscend.Tests.UnitTests
 
             };
 
-            PredictonHelper = new dat.PredictionHelper();
+            PredictionHelper = new dat.PredictionHelper();
         }
 
         [Fact]
         public void Test_SetPrediction()
         {
-            Assert.True(PredictonHelper.SetPrediction(sut, User.Username));
+            Assert.True(PredictionHelper.SetPrediction(sut, User.Username));
         }
 
         [Fact]
         public void Test_GetPredictionByTicker()
         {
-            var actual = PredictonHelper.GetPredictionByTicker(sut.Ticker);
+            var actual = PredictionHelper.GetPredictionByTicker(sut.Ticker);
 
             Assert.True(actual.Ticker == sut.Ticker);
         }
@@ -49,10 +49,16 @@ namespace MLTAscend.Tests.UnitTests
         [Fact]
         public void Test_GetPredictions()
         {
-            var actual = PredictonHelper.GetPredictions();
+            var actual = PredictionHelper.GetPredictions();
 
             Assert.True(actual.Count > 0);
             Assert.True(actual[0].Ticker == sut.Ticker);
+        }
+
+        [Fact]
+        public void Test_SetAnonymousPrediction()
+        {
+            Assert.True(PredictionHelper.SetAnonymousPrediction(sut));
         }
     }
 }

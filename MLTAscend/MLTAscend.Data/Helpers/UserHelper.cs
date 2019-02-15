@@ -35,6 +35,11 @@ namespace MLTAscend.Data.Helpers
             return _db.Predictions.Where(m => m.User.Username == username).ToList();
         }
 
+        public List<dom.Prediction> GetAnonymousPredictions()
+        {
+            return GetUserPredictions("anonymous");
+        }
+
         public List<dom.User> GetUsers()
         {
             return _db.Users.ToList();
