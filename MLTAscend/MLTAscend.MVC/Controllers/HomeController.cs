@@ -35,6 +35,11 @@ namespace MLTAscend.MVC.Controllers
       return RedirectToAction("User", "Logs");
     }
 
+    public IActionResult Ticker()
+    {
+      return View("../User/Ticker");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
