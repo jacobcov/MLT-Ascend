@@ -7,6 +7,8 @@ namespace MLTAscend.MVC.Models
 {
   public class Symbol
   {
+    public string Ticker { get; set; }
+    public string CompanyName { get; set; }
     public string Date { get; set; }
     public double Open { get; set; }
     public double High { get; set; }
