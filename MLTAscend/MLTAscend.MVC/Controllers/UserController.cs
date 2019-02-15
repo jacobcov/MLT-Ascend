@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MLTAscend.MVC.Models;
 using MLTAscend.MVC.ViewModels;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using dom = MLTAscend.Domain.Models;
 
 namespace MLTAscend.MVC.Controllers
 {
   public class UserController : Controller
   {
+    private static readonly HttpClient HttpClient;
+
+    static UserController()
+    {
+      HttpClient = new HttpClient();
+    }
+
     // add route
     public IActionResult LogIn(InUser signIn)
     {
@@ -61,8 +71,8 @@ namespace MLTAscend.MVC.Controllers
       {
         Predictions = uvm.GetPredictions()
       };
-      
-      if(TempData["inverse"] == null)
+
+      if (TempData["inverse"] == null)
       {
         TempData["inverse"] = false;
       }
@@ -114,14 +124,39 @@ namespace MLTAscend.MVC.Controllers
           TempData["inverse"] = !inverse;
           break;
       }
-      
+
       return View("../User/Logs", log);
     }
 
-    public IActionResult Ticker(Ticker ticker)
+    public async Task<IActionResult> Ticker(Ticker ticker)
     {
+      var _data = await GetTickerData(ticker);
+      ViewBag.tickerData = _data;
+
+      var _dayData = _data.FirstOrDefault(d => d.Date == ticker.Date);
+      ViewBag.tickerDay = _dayData;
 
       return View("../User/Ticker");
+    }
+
+    public async Task<IEnumerable<Symbol>> GetTickerData(Ticker ticker)
+    {
+      try
+      {
+        var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/chart/1y?filter=date,high,low,open,close,volume";
+
+        HttpResponseMessage response = await HttpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        var responseBody = await response.Content.ReadAsStringAsync();
+
+        var tickerData = JsonConvert.DeserializeObject<IEnumerable<Symbol>>(responseBody);
+
+        return tickerData;
+      }
+      catch (HttpRequestException e)
+      {
+        throw e;
+      }
     }
   }
 }
