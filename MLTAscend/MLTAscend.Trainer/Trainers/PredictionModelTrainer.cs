@@ -11,16 +11,16 @@ namespace MLTAscend.Trainer.Trainers
 {
    public static class PredictionModelTrainer
    {
-      public static void TrainAndSaveModel(MLContext mlContext, string dataPath, string outputModelPath = "../../../PredictionModels/prediction_model.zip")
+      public static void TrainAndSaveModel(MLContext mlContext, string dataPath, string outputModelPath)
       {
          if (File.Exists(outputModelPath))
          {
             File.Delete(outputModelPath);
          }
-         CreatePredictionModelUsingPipeline(mlContext, dataPath, outputModelPath);
+         CreatePredictionModel(mlContext, dataPath, outputModelPath);
       }
 
-      public static void CreatePredictionModelUsingPipeline(MLContext mlContext, string dataPath, string outputModelPath)
+      public static void CreatePredictionModel(MLContext mlContext, string dataPath, string outputModelPath)
       {
          var trainingDataView = mlContext.Data.ReadFromTextFile<StockData>(path: dataPath, hasHeader: true, separatorChar: ',');
 
@@ -38,9 +38,9 @@ namespace MLTAscend.Trainer.Trainers
             model.SaveTo(mlContext, file);
       }
 
-      public static PredictionResult TestPrediction(MLContext mlContext, StockData input, string outputModelPath = "prediction_model.zip")
+      public static PredictionResult TestPrediction(MLContext mlContext, StockData input, string outputModelPath)
       {
-         Console.WriteLine("Testing Product Unit Sales Forecast model");
+         Console.WriteLine("Testing Forecast model");
 
          // Read the model that has been previously saved by the method SaveModel
 
@@ -58,7 +58,7 @@ namespace MLTAscend.Trainer.Trainers
          // Predict the nextperiod/month forecast to the one provided
 
          PredictionResult prediction = predictionEngine.Predict(input);
-         Console.WriteLine($"Product: {input.open}, date: {"2019-01-10"}, yesterday's high: {input.high} - Real value (units): 103.7500, Forecast Prediction (units): {prediction.Score}");
+         Console.WriteLine($"Product: {input.timestamp}, Forecast Prediction (high): {prediction.Score}");
          Console.WriteLine("done");
          return prediction;
       }
