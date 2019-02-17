@@ -36,7 +36,6 @@ namespace MLTAscend.MVC
         {
           // Set a short timeout for easy testing.
           options.IdleTimeout = TimeSpan.FromMinutes(30);
-          options.Cookie.Name = "PizzaStore";
           options.Cookie.HttpOnly = true;
         });
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
