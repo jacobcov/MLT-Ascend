@@ -168,7 +168,7 @@ namespace MLTAscend.MVC.Controllers
       }
       catch (HttpRequestException hre)
       {
-        throw new Exception("Could not retrieve company name", hre);
+        throw new HttpRequestException("Could not retrieve company name", hre);
       }
     }
 
@@ -188,7 +188,7 @@ namespace MLTAscend.MVC.Controllers
       }
       catch (HttpRequestException hre)
       {
-        throw new Exception("Could not retrieve company name", hre);
+        throw new HttpRequestException("Could not retrieve company name", hre);
       }
     }
   }
