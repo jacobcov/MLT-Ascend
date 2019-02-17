@@ -32,7 +32,16 @@ namespace MLTAscend.MVC
          });
 
 
-         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        services.AddSession(options =>
+        {
+          // Set a short timeout for easy testing.
+          options.IdleTimeout = TimeSpan.FromMinutes(30);
+          options.Cookie.Name = "PizzaStore";
+          options.Cookie.HttpOnly = true;
+        });
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +62,14 @@ namespace MLTAscend.MVC
          app.UseStaticFiles();
          app.UseCookiePolicy();
 
-         app.UseMvc(routes =>
-         {
+        app.UseSession();
+
+        app.UseMvc(routes =>
+        {
             routes.MapRoute(
-                   name: "default",
-                   template: "{controller=Home}/{action=Index}/{id?}");
-         });
+                  name: "default",
+                  template: "{controller=Home}/{action=Index}/{id?}");
+        });
       }
    }
 }
