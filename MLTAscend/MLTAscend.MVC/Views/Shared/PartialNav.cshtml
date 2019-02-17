@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using dom = MLTAscend.Domain.Models;
+@using Newtonsoft.Json;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HCA
+
+<div id="navbarMenu" class="navbar-menu">
+  @if (HCA.HttpContext.Session.Keys.FirstOrDefault(k => k == "user") == null)
+  {
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" asp-controller="Home" asp-action="SignUp"><strong>Sign up</strong></a>
+          <a class="button is-primary" asp-controller="Home" asp-action="LogIn"><strong>Log in</strong></a>
+        </div>
+      </div>
+    </div>
+  }
+  else
+  {
+    var username = JsonConvert.DeserializeObject<dom.User>(HCA.HttpContext.Session.GetString("user")).Name;
+    <div class="navbar-start">
+      <a class="navbar-item" asp-controller="User" asp-action="Logs"><strong>Logs</strong></a>
+      <a class="navbar-item" asp-controller="Home" asp-action="Ticker"><strong>Ticker</strong></a>
+    </div>
+
+
+    <div class="navbar-end">
+      <div class="nav-link text-light">Welcome, @username</div>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" asp-controller="User" asp-action="LogOut"><strong>Log Out</strong></a>
+        </div>
+      </div>
+    </div>
+  }
+</div>
