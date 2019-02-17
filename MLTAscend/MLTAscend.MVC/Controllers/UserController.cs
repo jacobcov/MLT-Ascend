@@ -23,9 +23,9 @@ namespace MLTAscend.MVC.Controllers
 
         if (user != null && signIn.Password == user.Password)
         {
-          // add to session
+          HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-          return View("LoggedIn");
+          return RedirectToAction("index", "Home");
         }
       }
       return View("../Home/_LogIn");
@@ -43,13 +43,20 @@ namespace MLTAscend.MVC.Controllers
         {
           uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
 
-          // get user from db
-          // add to session
+          var user = uvm.GetUsers().FirstOrDefault(u => u.Username == signUp.Username);
+          HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-          return View("LoggedIn");
+          return RedirectToAction("index", "Home");
         }
       }
       return View("../Home/_SignUp");
+    }
+    
+    public IActionResult LogOut()
+    {
+      HttpContext.Session.Clear();
+
+      return View("../Home/Index");
     }
 
     [Route("[controller]/Logs/{sort?}")]
