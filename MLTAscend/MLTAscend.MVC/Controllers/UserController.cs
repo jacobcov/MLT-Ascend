@@ -16,11 +16,11 @@ namespace MLTAscend.MVC.Controllers
 {
   public class UserController : Controller
   {
-    private static readonly HttpClient HttpClient;
+    private static readonly HttpClient HttpClient = InitClient();
 
-    static UserController()
+    private static HttpClient InitClient()
     {
-      HttpClient = new HttpClient();
+      return new HttpClient();
     }
 
     // add route
@@ -159,9 +159,9 @@ namespace MLTAscend.MVC.Controllers
 
         return tickerData;
       }
-      catch (HttpRequestException e)
+      catch (HttpRequestException hre)
       {
-        throw e;
+        throw new Exception("Could not retrieve company name", hre);
       }
     }
 
@@ -179,9 +179,9 @@ namespace MLTAscend.MVC.Controllers
 
         return companyName;
       }
-      catch (HttpRequestException e)
+      catch (HttpRequestException hre)
       {
-        throw e;
+        throw new Exception("Could not retrieve company name", hre);
       }
     }
   }

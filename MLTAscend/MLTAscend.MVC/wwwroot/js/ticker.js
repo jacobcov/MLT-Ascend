@@ -31,10 +31,7 @@ button.click(function () {
         url: '@Url.Action("ProcessData", "User")',
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify({ ticker: tickerData }),
-        success: function (response) {
-          response ? alert("It worked!") : alert("It didn't work.");
-        }
+        data: JSON.stringify({ ticker: tickerData })
       });
     })
     .catch(error => console.log('error is', error));
