@@ -23,21 +23,7 @@
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" asp-controller="User" asp-action="Logs"><strong>Logs</strong></a>
-
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary" asp-controller="Home" asp-action="SignUp"><strong>Sign up</strong></a>
-              <a class="button is-primary" asp-controller="Home" asp-action="LogIn"><strong>Log in</strong></a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <partial name="PartialNav" />
     </nav>
   </header>
   <section class="section">
