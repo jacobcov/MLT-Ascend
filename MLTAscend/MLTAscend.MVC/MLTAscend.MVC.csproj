@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\PredictionModels\" />
   </ItemGroup>
 
 </Project>

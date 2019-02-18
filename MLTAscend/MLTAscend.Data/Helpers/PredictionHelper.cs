@@ -33,6 +33,11 @@ namespace MLTAscend.Data.Helpers
             return _db.SaveChanges() > 0;
         }
 
+        public bool SetAnonymousPrediction(dom.Prediction prediction)
+        {
+            return SetPrediction(prediction, "anonymous");
+        }
+
         public List<dom.Prediction> GetPredictions()
         {
             return _db.Predictions.ToList();
