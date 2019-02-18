@@ -21,23 +21,23 @@ namespace MLTAscend.Trainer
             timestamp = "2017-09-27",
             volume = 18934048
          };
-         var path = "../../../PredictionModels/OneDayPred_model.zip";
+         var path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneDayPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/OneDayData.csv", path);
          PredictionModelTrainer.TestPrediction(mlContext, dataSample, path);
 
-         path = "../../../PredictionModels/OneWeekPred_model.zip";
+         path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneWeekPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/OneWeekData.csv", path);
          PredictionModelTrainer.TestPrediction(mlContext, dataSample, path);
 
-         path = "../../../PredictionModels/OneMonthPred_model.zip";
+         path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneMonthPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/OneMonthData.csv", path);
          PredictionModelTrainer.TestPrediction(mlContext, dataSample, path);
 
-         path = "../../../PredictionModels/ThreeMonthPred_model.zip";
+         path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/ThreeMonthPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/ThreeMonthData.csv", path);
          PredictionModelTrainer.TestPrediction(mlContext, dataSample, path);
 
-         path = "../../../PredictionModels/OneYearPred_model.zip";
+         path = "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneYearPred_model.zip";
          PredictionModelTrainer.TrainAndSaveModel(mlContext, "../../../Data/OneYearData.csv", path);
          PredictionModelTrainer.TestPrediction(mlContext, dataSample, path);
          Console.ReadLine();

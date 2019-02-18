@@ -74,6 +74,11 @@ namespace MLTAscend.Data.Helpers
             return SetPrediction(prediction, "anonymous");
         }
 
+        public bool SetAnonymousPrediction(dom.Prediction prediction)
+        {
+            return SetPrediction(prediction, "anonymous");
+        }
+
         public List<dom.Prediction> GetPredictions()
         {
             if (ExtContext != null && IntContext == null)
