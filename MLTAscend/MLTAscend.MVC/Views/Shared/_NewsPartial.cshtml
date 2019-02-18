@@ -1,0 +1,28 @@
+﻿<h2>Related News*</h2>
+<br />
+
+@{ var n = ViewBag.news;}
+
+@{ foreach (var news in n)
+    {
+        <div>
+            <div>@news.Headline</div>
+            <div>
+                <div>@news.DateTime</div>
+                <div>Source: @news.Source</div>
+            </div>
+            <div>
+                <div>Article link: <a href="@news.Url">@news.Url</a></div>
+            </div>
+            <div>
+                <div>Summary:</div>
+            </div>
+            <div>
+                <div>@news.Summary</div>
+            </div>
+            <div>Related: @news.Related</div>
+        </div>
+        <br />
+    }
+    <div>*we cannot confirm the relatedness of the news articles</div>
+}
