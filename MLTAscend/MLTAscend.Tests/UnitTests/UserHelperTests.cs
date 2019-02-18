@@ -7,6 +7,7 @@ using dat = MLTAscend.Data.Helpers;
 
 namespace MLTAscend.Tests.UnitTests
 {
+    [Collection("DbHelperTests")]
     public class UserHelperTests
     {
         private dom.User sut { get; set; }
@@ -19,9 +20,9 @@ namespace MLTAscend.Tests.UnitTests
         {
             ExistUser = new dom.User()
             {
-                Name = "fred",
-                Username = "belottef",
-                Password = "peoples"
+                Name = "anon",
+                Username = "anonymous",
+                Password = "password"
             };
 
             sut = new dom.User()
@@ -70,6 +71,17 @@ namespace MLTAscend.Tests.UnitTests
 
             Assert.True(actual.Count > 0);
             Assert.True(actual[0].Ticker == "ryry");
+            Assert.True(actual[0].User.Username == ExistUser.Username);
+        }
+
+        [Fact]
+        public void Test_GetAnonymousPrediction()
+        {
+            var actual = UserHelper.GetAnonymousPredictions();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == "ryry");
+            Assert.True(actual[0].User.Username == ExistUser.Username);
         }
 
         [Fact]
