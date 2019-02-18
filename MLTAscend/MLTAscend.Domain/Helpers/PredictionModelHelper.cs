@@ -20,12 +20,19 @@ namespace MLTAscend.Domain.Helpers
          var p = new Prediction();
          var rootLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
+#if DEBUG
          p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneDayPred_model.zip")).Score;
          p.OneWeekPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneWeekPred_model.zip")).Score;
          p.OneMonthPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneMonthPred_model.zip")).Score;
          p.ThreeMonthPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/ThreeMonthPred_model.zip")).Score;
          p.OneYearPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneYearPred_model.zip")).Score;
-
+#else
+         p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "wwwroot/PredictionModels/OneDayPred_model.zip")).Score;
+         p.OneWeekPred = RunPrediction(input, Path.Combine(rootLocation, "wwwroot/PredictionModels/OneWeekPred_model.zip")).Score;
+         p.OneMonthPred = RunPrediction(input, Path.Combine(rootLocation, "wwwroot/PredictionModels/OneMonthPred_model.zip")).Score;
+         p.ThreeMonthPred = RunPrediction(input, Path.Combine(rootLocation, "wwwroot/PredictionModels/ThreeMonthPred_model.zip")).Score;
+         p.OneYearPred = RunPrediction(input, Path.Combine(rootLocation, "wwwroot/PredictionModels/OneYearPred_model.zip")).Score;
+#endif
          return p;
       }
 
