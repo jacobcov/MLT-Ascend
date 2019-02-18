@@ -164,12 +164,10 @@ namespace MLTAscend.MVC.Controllers
          _dayData.Ticker = ticker.Symbol;
          ViewBag.tickerDay = _dayData;
 
-         dom.User user = new dom.User();
-
          var _user = HttpContext.Session.GetString("user");
          if (_user != null)
          {
-            user = JsonConvert.DeserializeObject<dom.User>(_user);
+            var user = JsonConvert.DeserializeObject<dom.User>(_user);
             ViewBag.Prediction = uvm.CreateStockData(_dayData, user.Username);
          }
          else
