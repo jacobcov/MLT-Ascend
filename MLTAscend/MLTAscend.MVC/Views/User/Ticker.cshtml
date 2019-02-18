@@ -14,13 +14,6 @@
       </div>
       <p class="help is-danger">@Html.ValidationMessageFor(m => m.Symbol)</p>
     </div>
-    <div class="field">
-      @Html.LabelFor(m => m.Date, "Date", new { @class = "label" })
-      <div class="control">
-        @Html.TextBoxFor(m => m.Date, new { @class = "input", @id = "date" })
-      </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Date)</p>
-    </div>
     <div class="control">
       <button type="submit" class="button is-primary" id="getTicker">Get Info</button>
     </div>

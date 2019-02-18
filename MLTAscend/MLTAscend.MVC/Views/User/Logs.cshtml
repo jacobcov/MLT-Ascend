@@ -25,14 +25,14 @@
          @foreach (var item in Model.Predictions)
          {
             <tr>
-               <td>@item.CreationDate.ToShortDateString()</td>
+               <td>@item.CreationDate.ToLocalTime()</td>
                <td>@item.CompanyName</td>
                <td>@item.Ticker</td>
-               <td>@item.OneDayPred</td>
-               <td>@item.OneWeekPred</td>
-               <td>@item.OneMonthPred</td>
-               <td>@item.ThreeMonthPred</td>
-               <td>@item.OneYearPred</td>
+               <td>@String.Format("{0:C2}", item.OneDayPred)</td>
+               <td>@String.Format("{0:C2}", item.OneWeekPred)</td>
+               <td>@String.Format("{0:C2}", item.OneMonthPred)</td>
+               <td>@String.Format("{0:C2}", item.ThreeMonthPred)</td>
+               <td>@String.Format("{0:C2}", item.OneYearPred)</td>
             </tr>
          }
       </tbody>

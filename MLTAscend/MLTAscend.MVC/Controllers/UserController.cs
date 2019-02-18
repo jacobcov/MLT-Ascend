@@ -74,10 +74,30 @@ namespace MLTAscend.MVC.Controllers
     {
       var uvm = new UserViewModel();
 
-      var log = new Log()
+      dom.User user = new dom.User();
+
+      var _user = HttpContext.Session.GetString("user");
+      if (_user != null)
       {
-        Predictions = uvm.GetPredictions()
-      };
+        user = JsonConvert.DeserializeObject<dom.User>(_user);
+      }
+
+      Log log;
+
+      if (_user == null)
+      {
+        log = new Log()
+        {
+          Predictions = uvm.GetPredictionsByUser("anonymous")
+        };
+      }
+      else
+      {
+        log = new Log()
+        {
+          Predictions = uvm.GetPredictionsByUser(user.Username)
+        };
+      }      
 
       if (TempData["inverse"] == null)
       {
@@ -142,12 +162,23 @@ namespace MLTAscend.MVC.Controllers
       var _data = await GetTickerData(ticker);
       ViewBag.tickerData = _data;
 
-      var _dayData = _data.FirstOrDefault(d => d.Date == ticker.Date);
+      var _dayData = _data.LastOrDefault();
       _dayData.CompanyName = await GetCompanyName(ticker);
       _dayData.Ticker = ticker.Symbol;
       ViewBag.tickerDay = _dayData;
 
-      uvm.CreateStockData(_dayData);
+      dom.User user = new dom.User();
+
+      var _user = HttpContext.Session.GetString("user");
+      if (_user != null)
+      {
+        user = JsonConvert.DeserializeObject<dom.User>(_user);
+        ViewBag.Prediction = uvm.CreateStockData(_dayData, user.Username);
+      }
+      else
+      {
+        ViewBag.Prediction = uvm.CreateStockData(_dayData, "anonymous");
+      }
 
       return View("../User/Ticker");
     }
@@ -168,7 +199,7 @@ namespace MLTAscend.MVC.Controllers
       }
       catch (HttpRequestException hre)
       {
-        throw new HttpRequestException("Could not retrieve company name", hre);
+        throw new HttpRequestException("Could not retrieve ticker", hre);
       }
     }
 
