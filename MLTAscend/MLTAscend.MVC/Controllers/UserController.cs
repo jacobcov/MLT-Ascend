@@ -16,233 +16,230 @@ using System.Net.Http.Formatting;
 
 namespace MLTAscend.MVC.Controllers
 {
-    public class UserController : Controller
-    {
-        private static readonly HttpClient HttpClient = InitClient();
+   public class UserController : Controller
+   {
+      private static readonly HttpClient HttpClient = InitClient();
 
-        private static HttpClient InitClient()
-        {
-            return new HttpClient();
-        }
-
-        // add route
-        public IActionResult LogIn(InUser signIn)
-        {
-            if (ModelState.IsValid)
-            {
-                var uvm = new UserViewModel();
-                var user = uvm.GetUsers().FirstOrDefault(u => u.Username == signIn.Username);
-
-                if (user != null && signIn.Password == user.Password)
-                {
-                    HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
-
-                    return RedirectToAction("index", "Home");
-                }
-            }
-            return View("../Home/_LogIn");
-        }
-
-        // add route
-        public IActionResult SignUp(UpUser signUp)
-        {
-            if (ModelState.IsValid)
-            {
-                var uvm = new UserViewModel();
-                var users = uvm.GetUsers();
-
-                if (!users.Exists(u => u.Username == signUp.Username) && signUp.Password == signUp.Confirm)
-                {
-                    uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
-
-                    var user = uvm.GetUsers().FirstOrDefault(u => u.Username == signUp.Username);
-                    HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
-
-                    return RedirectToAction("index", "Home");
-                }
-            }
-            return View("../Home/_SignUp");
-        }
-
-        public IActionResult LogOut()
-        {
-            HttpContext.Session.Clear();
-
-            return View("../Home/Index");
-        }
-
-    [Route("[controller]/Logs/{sort?}")]
-    public IActionResult Logs(string sort)
-    {
-      var uvm = new UserViewModel();
-
-      dom.User user = new dom.User();
-
-      var _user = HttpContext.Session.GetString("user");
-      if (_user != null)
+      private static HttpClient InitClient()
       {
-        user = JsonConvert.DeserializeObject<dom.User>(_user);
+         return new HttpClient();
       }
 
-      Log log;
-
-      if (_user == null)
+      // add route
+      public IActionResult LogIn(InUser signIn)
       {
-        log = new Log()
-        {
-          Predictions = uvm.GetPredictionsByUser("anonymous")
-        };
-      }
-      else
-      {
-        log = new Log()
-        {
-          Predictions = uvm.GetPredictionsByUser(user.Username)
-        };
-      }      
-
-      if (TempData["inverse"] == null)
-      {
-        TempData["inverse"] = false;
-      }
-
-      var inverse = (bool)TempData["inverse"];
-
-      switch (sort)
-      {
-        case "CreationDate":
-          if (inverse)
-          {
-            log.Predictions.Sort((x, y) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          else
-          {
-            log.Predictions.Sort((y, x) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          TempData["inverse"] = !inverse;
-          break;
-        case "CompanyName":
-        case "Ticker":
-          if (inverse)
-          {
-            log.Predictions.Sort((x, y) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          else
-          {
-            log.Predictions.Sort((y, x) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          TempData["inverse"] = !inverse;
-          break;
-        case "OneDayPred":
-        case "OneWeekPred":
-        case "OneMonthPred":
-        case "ThreeMonthPred":
-        case "OneYearPred":
-          if (inverse)
-          {
-            log.Predictions.Sort((x, y) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          else
-          {
-            log.Predictions.Sort((y, x) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
-          }
-          TempData["inverse"] = !inverse;
-          break;
-        default:
-          log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
-          TempData["inverse"] = !inverse;
-          break;
-      }
-
-      return View("../User/Logs", log);
-    }
-    
-        public async Task<IActionResult> Ticker(Ticker ticker)
-        {
+         if (ModelState.IsValid)
+         {
             var uvm = new UserViewModel();
-            var _data = await GetTickerData(ticker);
-            ViewBag.tickerData = _data;
+            var user = uvm.GetUsers().FirstOrDefault(u => u.Username == signIn.Username);
 
-      var _dayData = _data.LastOrDefault();
-      _dayData.CompanyName = await GetCompanyName(ticker);
-      _dayData.Ticker = ticker.Symbol;
-      ViewBag.tickerDay = _dayData;
-
-      dom.User user = new dom.User();
-
-      var _user = HttpContext.Session.GetString("user");
-      if (_user != null)
-      {
-        user = JsonConvert.DeserializeObject<dom.User>(_user);
-        ViewBag.Prediction = uvm.CreateStockData(_dayData, user.Username);
-      }
-      else
-      {
-        ViewBag.Prediction = uvm.CreateStockData(_dayData, "anonymous");
-      }
-            var news = await GetTickerNews(ticker);
-            ViewBag.news = news;
-
-            return View("../User/Ticker");
-        }
-
-    public async Task<IEnumerable<Symbol>> GetTickerData(Ticker ticker)
-    {
-      try
-      {
-        var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/chart/1y?filter=date,high,low,open,close,volume";
-
-        HttpResponseMessage response = await HttpClient.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-        var responseBody = await response.Content.ReadAsStringAsync();
-
-        var tickerData = JsonConvert.DeserializeObject<IEnumerable<Symbol>>(responseBody);
-
-        return tickerData;
-      }
-      catch (HttpRequestException hre)
-      {
-        throw new HttpRequestException("Could not retrieve ticker", hre);
-      }
-    }
-        public async Task<string> GetCompanyName(Ticker ticker)
-        {
-            try
+            if (user != null && signIn.Password == user.Password)
             {
-                var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/company?filter=companyName";
+               HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
 
-                HttpResponseMessage response = await HttpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                var companyName = JsonConvert.DeserializeAnonymousType(responseBody, new { companyName = "" }).companyName;
-
-                return companyName;
+               return RedirectToAction("index", "Home");
             }
-            catch (HttpRequestException hre)
+         }
+         return View("../Home/_LogIn");
+      }
+
+      // add route
+      public IActionResult SignUp(UpUser signUp)
+      {
+         if (ModelState.IsValid)
+         {
+            var uvm = new UserViewModel();
+            var users = uvm.GetUsers();
+
+            if (!users.Exists(u => u.Username == signUp.Username) && signUp.Password == signUp.Confirm)
             {
-                throw new HttpRequestException("Could not retrieve company name", hre);
-            }
-        }
+               uvm.SignUp(signUp.Name, signUp.Username, signUp.Password);
 
-        public async Task<IEnumerable<News>> GetTickerNews(Ticker ticker)
-        {
-            try
+               var user = uvm.GetUsers().FirstOrDefault(u => u.Username == signUp.Username);
+               HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+
+               return RedirectToAction("index", "Home");
+            }
+         }
+         return View("../Home/_SignUp");
+      }
+
+      public IActionResult LogOut()
+      {
+         HttpContext.Session.Clear();
+
+         return View("../Home/Index");
+      }
+
+      [Route("[controller]/Logs/{sort?}")]
+      public IActionResult Logs(string sort)
+      {
+         var uvm = new UserViewModel();
+
+         dom.User user;
+         Log log;
+
+         var _user = HttpContext.Session.GetString("user");
+         if (_user != null)
+         {
+            user = JsonConvert.DeserializeObject<dom.User>(_user);
+
+            log = new Log()
             {
-                var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/news/last/5";
-
-                HttpResponseMessage response = await HttpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                var newsData = JsonConvert.DeserializeObject<IEnumerable<News>>(responseBody);
-
-                return newsData;
-            }
-            catch (HttpRequestException hre)
+               Predictions = uvm.GetPredictionsByUser(user.Username)
+            };
+         }         
+         else
+         {
+            log = new Log()
             {
-                throw new HttpRequestException("Could not retrieve company news", hre);
-            }
-        }
-    }
+               Predictions = uvm.GetPredictionsByUser("anonymous")
+            };
+         }
+
+         if (TempData["inverse"] == null)
+         {
+            TempData["inverse"] = false;
+         }
+
+         var inverse = (bool)TempData["inverse"];
+
+         switch (sort)
+         {
+            case "CreationDate":
+               if (inverse)
+               {
+                  log.Predictions.Sort((x, y) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               else
+               {
+                  log.Predictions.Sort((y, x) => ((DateTime)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((DateTime)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               TempData["inverse"] = !inverse;
+               break;
+            case "CompanyName":
+            case "Ticker":
+               if (inverse)
+               {
+                  log.Predictions.Sort((x, y) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               else
+               {
+                  log.Predictions.Sort((y, x) => ((string)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((string)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               TempData["inverse"] = !inverse;
+               break;
+            case "OneDayPred":
+            case "OneWeekPred":
+            case "OneMonthPred":
+            case "ThreeMonthPred":
+            case "OneYearPred":
+               if (inverse)
+               {
+                  log.Predictions.Sort((x, y) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               else
+               {
+                  log.Predictions.Sort((y, x) => ((double)y.GetType().GetProperty(sort).GetValue(y)).CompareTo((double)x.GetType().GetProperty(sort).GetValue(x)));
+               }
+               TempData["inverse"] = !inverse;
+               break;
+            default:
+               log.Predictions.Sort((x, y) => y.CreationDate.CompareTo(x.CreationDate));
+               TempData["inverse"] = !inverse;
+               break;
+         }
+
+         return View("../User/Logs", log);
+      }
+
+      public async Task<IActionResult> Ticker(Ticker ticker)
+      {
+         var uvm = new UserViewModel();
+         var _data = await GetTickerData(ticker);
+         ViewBag.tickerData = _data;
+
+         var _dayData = _data.LastOrDefault();
+         _dayData.CompanyName = await GetCompanyName(ticker);
+         _dayData.Ticker = ticker.Symbol;
+         ViewBag.tickerDay = _dayData;
+
+         dom.User user = new dom.User();
+
+         var _user = HttpContext.Session.GetString("user");
+         if (_user != null)
+         {
+            user = JsonConvert.DeserializeObject<dom.User>(_user);
+            ViewBag.Prediction = uvm.CreateStockData(_dayData, user.Username);
+         }
+         else
+         {
+            ViewBag.Prediction = uvm.CreateStockData(_dayData, "anonymous");
+         }
+         var news = await GetTickerNews(ticker);
+         ViewBag.news = news;
+
+         return View("../User/Ticker");
+      }
+
+      public async Task<IEnumerable<Symbol>> GetTickerData(Ticker ticker)
+      {
+         try
+         {
+            var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/chart/1y?filter=date,high,low,open,close,volume";
+
+            HttpResponseMessage response = await HttpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var tickerData = JsonConvert.DeserializeObject<IEnumerable<Symbol>>(responseBody);
+
+            return tickerData;
+         }
+         catch (HttpRequestException hre)
+         {
+            throw new HttpRequestException("Could not retrieve ticker", hre);
+         }
+      }
+
+      public async Task<string> GetCompanyName(Ticker ticker)
+      {
+         try
+         {
+            var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/company?filter=companyName";
+
+            HttpResponseMessage response = await HttpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var companyName = JsonConvert.DeserializeAnonymousType(responseBody, new { companyName = "" }).companyName;
+
+            return companyName;
+         }
+         catch (HttpRequestException hre)
+         {
+            throw new HttpRequestException("Could not retrieve company name", hre);
+         }
+      }
+
+      public async Task<IEnumerable<News>> GetTickerNews(Ticker ticker)
+      {
+         try
+         {
+            var url = $"https://api.iextrading.com/1.0/stock/{ticker.Symbol}/news/last/5";
+
+            HttpResponseMessage response = await HttpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var newsData = JsonConvert.DeserializeObject<IEnumerable<News>>(responseBody);
+
+            return newsData;
+         }
+         catch (HttpRequestException hre)
+         {
+            throw new HttpRequestException("Could not retrieve company news", hre);
+         }
+      }
+   }
 }
