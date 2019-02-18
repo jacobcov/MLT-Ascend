@@ -1,7 +1,6 @@
 ﻿@*
    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model MLTAscend.Domain.Models.Prediction
 <div id="chart_div"></div>
 
 
@@ -19,10 +18,17 @@
 
          var data = new google.visualization.DataTable();
          data.addColumn('number', 'Date');
-         data.addColumn('number', 'MSFT');
-         @{ var p = Model;}
+         data.addColumn('number', @ViewBag.tickerDay.Ticker);
+         @{
+           var l = (List<Symbol>)ViewBag.tickerData;
+            l.Reverse();
+          foreach (var item in l)
+            {
+               @:data.addRows([@l.IndexOf(item)*-1,@item.High])
+            }
+            }
          data.addRows([
-            [0,100],[1,@p.OneDayPred],[7,@p.OneWeekPred],[30,@p.OneMonthPred],[90,@p.ThreeMonthPred],[360,@p.OneYearPred]
+            [1,@ViewBag.Prediction.OneDayPred],[7,@ViewBag.Prediction.OneWeekPred],[30,@ViewBag.Prediction.OneMonthPred],[90,@ViewBag.Prediction.ThreeMonthPred],[360,@ViewBag.Prediction.OneYearPred]
          ]);
 
          var options = {
