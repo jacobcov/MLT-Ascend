@@ -209,11 +209,6 @@ namespace MLTAscend.MVC.Controllers
 
                 var newsData = JsonConvert.DeserializeObject<IEnumerable<News>>(responseBody);
 
-                //foreach(var item in newsData)
-                //{
-                //    item.DateTime = item.DateString.to;
-                //}
-
                 return newsData;
             }
             catch (HttpRequestException hre)
