@@ -20,7 +20,7 @@ namespace MLTAscend.Domain.Helpers
          var p = new Prediction();
          var rootLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-#if RELEASE
+#if DEBUG
          p.OneDayPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneDayPred_model.zip")).Score;
          p.OneWeekPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneWeekPred_model.zip")).Score;
          p.OneMonthPred = RunPrediction(input, Path.Combine(rootLocation, "../../../../MLTAscend.MVC/wwwroot/PredictionModels/OneMonthPred_model.zip")).Score;
