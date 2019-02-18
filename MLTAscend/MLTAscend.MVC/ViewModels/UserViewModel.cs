@@ -10,53 +10,61 @@ using MLTAscend.MVC.Models;
 
 namespace MLTAscend.MVC.ViewModels
 {
-   public class UserViewModel
-   {
-      public List<dom.User> GetUsers()
+  public class UserViewModel
+  {
+    public List<dom.User> GetUsers()
+    {
+      var uh = new UserHelper();
+      return uh.GetUsers();
+    }
+
+    internal bool SignUp(string name, string username, string password)
+    {
+      var uh = new UserHelper();
+
+      var usr = new dom.User()
       {
-         var uh = new UserHelper();
-         return uh.GetUsers();
-      }
+        Name = name,
+        Username = username,
+        Password = password
+      };
 
-      internal bool SignUp(string name, string username, string password)
+      return uh.SetUser(usr);
+    }
+
+    internal List<dom.Prediction> GetPredictions()
+    {
+      var ph = new PredictionHelper();
+      return ph.GetPredictions();
+    }
+
+    internal dom.Prediction CreateStockData(Symbol ticker, string username)
+    {
+      var ph = new PredictionHelper();
+
+      var stockData = new dmt.StockData()
       {
-         var uh = new UserHelper();
+        timestamp = ticker.Date,
+        open = (float)ticker.Open,
+        high = (float)ticker.High,
+        low = (float)ticker.Low,
+        close = (float)ticker.Close,
+        volume = ticker.Volume
+      };
 
-         var usr = new dom.User()
-         {
-            Name = name,
-            Username = username,
-            Password = password
-         };
+      var prediction = PredictionModelHelper.RunAllPredictions(stockData);
+      prediction.CompanyName = ticker.CompanyName;
+      prediction.Ticker = ticker.Ticker;
 
-         return uh.SetUser(usr);
-      }
+      ph.SetPrediction(prediction, username);
 
-      internal List<dom.Prediction> GetPredictions()
-      {
-         var ph = new PredictionHelper();
-         return ph.GetPredictions();
-      }
+      return prediction;
+    }
 
-      internal bool CreateStockData(Symbol ticker)
-      {
-         var ph = new PredictionHelper();
-
-         var stockData = new dmt.StockData()
-         {
-            timestamp = ticker.Date,
-            open = (float)ticker.Open,
-            high = (float)ticker.High,
-            low = (float)ticker.Low,
-            close = (float)ticker.Close,
-            volume = ticker.Volume
-         };
-
-         var prediction = PredictionModelHelper.RunAllPredictions(stockData);
-         prediction.CompanyName = ticker.CompanyName;
-         prediction.Ticker = ticker.Ticker;
-
-         return ph.SetPrediction(prediction, "anonymous");
-      }
-   }
+    internal List<dom.Prediction> GetPredictionsByUser(string username)
+    {
+      var uh = new UserHelper();
+      return uh.GetUserPredictions(username);
+    }
+  }
 }
