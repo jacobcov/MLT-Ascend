@@ -70,6 +70,11 @@ namespace MLTAscend.Data.Helpers
             }
         }
 
+        public List<dom.Prediction> GetAnonymousPredictions()
+        {
+            return GetUserPredictions("anonymous");
+        }
+
         public List<dom.User> GetUsers()
         {
             if (ExtContext != null && IntContext == null)
