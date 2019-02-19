@@ -20,7 +20,7 @@
     var username = JsonConvert.DeserializeObject<dom.User>(HCA.HttpContext.Session.GetString("user")).Name;
 
     <div class="navbar-end">
-      <div class="nav-link text-light">Welcome, @username</div>
+      <div class="navbar-item"><strong>Welcome, @username</strong></div>
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-primary" asp-controller="User" asp-action="LogOut"><strong>Log Out</strong></a>
