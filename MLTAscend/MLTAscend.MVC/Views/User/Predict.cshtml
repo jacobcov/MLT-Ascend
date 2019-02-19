@@ -1,11 +1,11 @@
 ﻿@model MLTAscend.MVC.Models.Ticker
 
 @{
-    ViewData["Title"] = "Ticker";
+    ViewData["Title"] = "Predict";
 }
 
 <div class="box">
-  @using (Html.BeginForm("Ticker", "User"))
+  @using (Html.BeginForm("Predict", "User"))
   {
     <div class="field">
       @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
