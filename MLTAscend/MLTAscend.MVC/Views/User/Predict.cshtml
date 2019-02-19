@@ -1,0 +1,85 @@
+﻿@model MLTAscend.MVC.Models.Ticker
+
+@{
+    ViewData["Title"] = "Predict";
+}
+
+<div class="box">
+   <div class="columns is-vcentered">
+      <div class="column is-one-fifth">
+         @using (Html.BeginForm("Predict", "User"))
+         {
+         <div class="field">
+            @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
+            <div class="control">
+               @Html.TextBoxFor(m => m.Symbol, new { @class = "input", @id = "symbol" })
+            </div>
+            <p class="help is-danger">@Html.ValidationMessageFor(m => m.Symbol)</p>
+         </div>
+         <div class="control">
+            <button type="submit" class="button is-primary" id="getTicker">Get Info</button>
+         </div>
+         }
+      </div>
+      <div class="column is-four-fifths">
+         @{if (ViewBag.Prediction != null)
+         {
+            var prediction = ViewBag.Prediction;
+            <table class="table is-striped is-fullwidth">
+               <thead>
+                  <tr>
+                     <th id="date"><abbr title="Creation Date">Date</abbr></th>
+                     <th id="companyName">Company Name</th>
+                     <th id="ticker"><abbr title="Ticker">Tkr</abbr></th>
+                     <th id="1d"><abbr title="One Day">1d</abbr></th>
+                     <th id="1w"><abbr title="One Week">1w</abbr></th>
+                     <th id="1mo"><abbr title="One Month">1mo</abbr></th>
+                     <th id="3mo"><abbr title="Three Month">3mo</abbr></th>
+                     <th id="1yr"><abbr title="One Year">1yr</abbr></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>@prediction.CreationDate.ToLocalTime()</td>
+                     <td>@prediction.CompanyName</td>
+                     <td>@prediction.Ticker</td>
+                     <td>@String.Format("{0:C2}", prediction.OneDayPred)</td>
+                     <td>@String.Format("{0:C2}", prediction.OneWeekPred)</td>
+                     <td>@String.Format("{0:C2}", prediction.OneMonthPred)</td>
+                     <td>@String.Format("{0:C2}", prediction.ThreeMonthPred)</td>
+                     <td>@String.Format("{0:C2}", prediction.OneYearPred)</td>
+                  </tr>
+               </tbody>
+            </table>
+            }
+         }
+      </div>
+   </div>
+</div>
+
+@{ if (ViewBag.Prediction != null)
+   {
+   <div class="box">
+      <div>
+         This is a test of the extreme weather monitoring service
+      </div>
+      <div>
+         <partial name="_StockPlotPartial" />
+      </div>
+   </div>
+   }
+}
+
+@if (ViewBag.news != null)
+{
+<div class="box">
+   <partial name="_NewsPartial" />
+</div>
+}
+
+@section Scripts
+   {
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+}
