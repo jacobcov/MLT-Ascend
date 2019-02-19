@@ -11,8 +11,5 @@ namespace MLTAscend.MVC.Models
     [Required]
     [MaxLength(5, ErrorMessage = "Must be less than 5 characters")]
     public string Symbol { get; set; }
-
-    [Required]
-    public string Date { get; set; }
   }
 }
