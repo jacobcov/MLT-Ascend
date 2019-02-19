@@ -8,39 +8,82 @@ using System.Linq;
 
 namespace MLTAscend.Data.Helpers
 {
-    public class PredictionHelper
-    {
-        private static MLTAscendDbContext _db = new MLTAscendDbContext();
+   public class PredictionHelper
+   {
+      public MltAscendDbContext ExtContext { get; set; }
+      public InMemoryDbContext IntContext { get; set; }
 
-        public dom.Prediction GetPredictionByTicker(string ticker)
-        {
-            return _db.Predictions.LastOrDefault(m => m.Ticker == ticker);
-        }
+      public PredictionHelper()
+      {
+         ExtContext = new MltAscendDbContext(MltAscendDbContext.Configuration);
+         IntContext = null;
+      }
 
-        public bool SetPrediction(dom.Prediction prediction, string username)
-        {
-            var uh = new UserHelper();
+      public PredictionHelper(InMemoryDbContext context)
+      {
+         IntContext = context;
+         ExtContext = null;
+      }
 
-            prediction.CreationDate = DateTime.Now;
+      public dom.Prediction GetPredictionByTicker(string ticker)
+      {
+         if (ExtContext != null && IntContext == null)
+         {
+            return ExtContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+         }
+         else
+         {
+            return IntContext.Predictions.LastOrDefault(m => m.Ticker == ticker);
+         }
+      }
+
+      public bool SetPrediction(dom.Prediction prediction, string username)
+      {
+         prediction.CreationDate = DateTime.Now;
+
+         if (ExtContext != null && IntContext == null)
+         {
+            UserHelper uh = new UserHelper();
+
             var usr = uh.GetUserByUsername(username);
             prediction.User = usr;
-
-            var e = _db.Entry<dom.Prediction>(prediction).Entity;
+            var e = ExtContext.Entry<dom.Prediction>(prediction).Entity;
 
             e.User = usr;
-            _db.Predictions.Attach(e).State = EntityState.Added;
+            ExtContext.Predictions.Attach(e).State = EntityState.Added;
 
-            return _db.SaveChanges() > 0;
-        }
+            return ExtContext.SaveChanges() > 0;
+         }
+         else
+         {
+            var uh = new UserHelper(new InMemoryDbContext());
 
-        public bool SetAnonymousPrediction(dom.Prediction prediction)
-        {
-            return SetPrediction(prediction, "anonymous");
-        }
+            var us = uh.GetUserByUsername(username);
+            prediction.User = us;
 
-        public List<dom.Prediction> GetPredictions()
-        {
-            return _db.Predictions.ToList();
-        }
-    }
+            var e = IntContext.Entry<dom.Prediction>(prediction).Entity;
+
+            e.User = us;
+            IntContext.Predictions.Attach(e).State = EntityState.Added;
+            return IntContext.SaveChanges() > 0;
+         }
+      }
+
+      public bool SetAnonymousPrediction(dom.Prediction prediction)
+      {
+         return SetPrediction(prediction, "anonymous");
+      }
+
+      public List<dom.Prediction> GetPredictions()
+      {
+         if (ExtContext != null && IntContext == null)
+         {
+            return ExtContext.Predictions.ToList();
+         }
+         else
+         {
+            return IntContext.Predictions.ToList();
+         }
+      }
+   }
 }
