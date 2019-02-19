@@ -7,6 +7,7 @@
 <div class="box">
    @using (Html.BeginForm("Ticker", "User"))
    {
+      @:Please enter the symbol/ ticker for the stock you wish to make a prediction for
       <div class="field">
          @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
          <div class="control">
@@ -37,9 +38,6 @@
 
    @{ if (ViewBag.Prediction != null)
       {
-         <div>
-            This is a test of the extreme weather monitoring service
-         </div>
          <div>
             <partial name="_StockPlotPartial" />
          </div>
