@@ -30,14 +30,14 @@ namespace MLTAscend.MVC.Controllers
       return View("_SignUp");
     }
 
-    public IActionResult Logs()
+    public IActionResult History()
     {
-      return RedirectToAction("User", "Logs");
+      return RedirectToAction("User", "History");
     }
 
-    public IActionResult Ticker()
+    public IActionResult Predict()
     {
-      return View("../User/Ticker");
+      return View("../User/Predict");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
