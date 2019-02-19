@@ -10,21 +10,26 @@
 </head>
 <body>
   <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" asp-controller="Home" asp-action="Index">
-          <img src="~/images/AscendLogo.png" alt="Ascend" width="112" height="28">
-        </a>
+     <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+           <a class="navbar-item" asp-controller="Home" asp-action="Index">
+              <img src="~/images/AscendLogo.png" alt="Ascend" width="112" height="28">
+           </a>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+           </a>
+        </div>
 
-      <partial name="PartialNav"/>
-    </nav>
+        <div class="navbar-start">
+           <a class="navbar-item" asp-controller="User" asp-action="History"><strong>History</strong></a>
+           <a class="navbar-item" asp-controller="Home" asp-action="Predict"><strong>Predict</strong></a>
+        </div>
+
+        <partial name="PartialNav" />
+     </nav>
   </header>
   <section class="section">
     <div class="container">
