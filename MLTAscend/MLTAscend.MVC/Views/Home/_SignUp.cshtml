@@ -1,49 +1,63 @@
 ﻿@model MLTAscend.MVC.Models.UpUser
 
 @{
-  ViewData["Title"] = "SignUp";
+   ViewData["Title"] = "SignUp";
 }
 
 <div class="box">
-  @using (Html.BeginForm("SignUp", "User"))
-  {
-    <div class="field">
-      @Html.LabelFor(m => m.Name, "Name", new { @class = "label" })
-      <div class="control">
-        @Html.TextBoxFor(m => m.Name, new { @class = "input" })
+   Please enter your desired credentials below and start being able to:
+   <div class="columns">
+      <ul class="is-offset-1 column" style="list-style-type:disc;">
+         <li>
+            Keep your predictions secret only to yourself
+         </li>
+         <li>
+            View a visual representation of your prediction after it is made
+         </li>
+         <li>
+            See the news related to your prediction to further inform your investment
+         </li>
+      </ul>
+   </div>
+   @using (Html.BeginForm("SignUp", "User"))
+   {
+      <div class="field">
+         @Html.LabelFor(m => m.Name, "Name", new { @class = "label" })
+         <div class="control">
+            @Html.TextBoxFor(m => m.Name, new { @class = "input", @placeholder = "eg. John" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Name)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Name)</p>
-    </div>
-    <div class="field">
-      @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
-      <div class="control">
-        @Html.TextBoxFor(m => m.Username, new { @class = "input" })
+      <div class="field">
+         @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
+         <div class="control">
+            @Html.TextBoxFor(m => m.Username, new { @class = "input", @placeholder = "Enter your desired username" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Username)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Username)</p>
-    </div>
-    <div class="field">
-      @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
-      <div class="control">
-        @Html.PasswordFor(m => m.Password, new { @class = "input" })
+      <div class="field">
+         @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
+         <div class="control">
+            @Html.PasswordFor(m => m.Password, new { @class = "input", @placeholder = "Enter desired password" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Password)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Password)</p>
-    </div>
-    <div class="field">
-      @Html.LabelFor(m => m.Confirm, "Confirm Password", new { @class = "label" })
-      <div class="control">
-        @Html.PasswordFor(m => m.Confirm, new { @class = "input" })
+      <div class="field">
+         @Html.LabelFor(m => m.Confirm, "Confirm Password", new { @class = "label" })
+         <div class="control">
+            @Html.PasswordFor(m => m.Confirm, new { @class = "input", @placeholder = "Confirm password" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Confirm)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Confirm)</p>
-    </div>
-    <div class="control">
-      <button type="submit" class="button is-primary" id="signup">Sign Up</button>
-    </div>
-  }
+      <div class="control">
+         <button type="submit" class="button is-primary" id="signup">Sign Up</button>
+      </div>
+   }
 </div>
 
 @section Scripts
-  {
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+   {
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 }

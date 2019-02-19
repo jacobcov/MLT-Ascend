@@ -1,38 +1,39 @@
 ﻿@model MLTAscend.MVC.Models.InUser
 
 @{
-  ViewData["Title"] = "LogIn";
+   ViewData["Title"] = "LogIn";
 }
 
 <div class="box">
-  @using (Html.BeginForm("LogIn", "User"))
-  {
-    <div class="field">
-      @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
-      <div class="control">
-        @Html.TextBoxFor(m => m.Username, new { @class = "input" })
+   Please enter your login information below
+   @using (Html.BeginForm("LogIn", "User"))
+   {
+      <div class="field">
+         @Html.LabelFor(m => m.Username, "Username", new { @class = "label" })
+         <div class="control">
+            @Html.TextBoxFor(m => m.Username, new { @class = "input", @placeholder = "Enter your username" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Username)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Username)</p>
-    </div>
-    <div class="field">
-      @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
-      <div class="control">
-        @Html.PasswordFor(m => m.Password, new { @class = "input" })
+      <div class="field">
+         @Html.LabelFor(m => m.Password, "Password", new { @class = "label" })
+         <div class="control">
+            @Html.PasswordFor(m => m.Password, new { @class = "input", @placeholder = "Enter your password" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Password)</p>
       </div>
-      <p class="help is-danger">@Html.ValidationMessageFor(m => m.Password)</p>
-    </div>
-    <div class="control">
-      <button type="submit" class="button is-primary" id="login">Log in</button>
-    </div>
-    <div class="field">
-      <small class="control">Not a User? <a class="is-inline" asp-controller="Home" asp-action="SignUp">Sign Up</a> Now.</small>
-    </div>
-  }
+      <div class="control">
+         <button type="submit" class="button is-primary" id="login">Log in</button>
+      </div>
+      <div class="field">
+         <small class="control">Not a User? <a class="is-inline" asp-controller="Home" asp-action="SignUp">Sign Up</a> Now.</small>
+      </div>
+   }
 </div>
 
 @section Scripts
-  {
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+   {
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 }

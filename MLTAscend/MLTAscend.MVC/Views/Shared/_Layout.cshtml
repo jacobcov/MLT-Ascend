@@ -1,51 +1,54 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ascend</title>
-  <link rel="stylesheet" href="~/css/mystyle.css">
-  <link rel="icon" href="~/images/favicon.ico">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Ascend</title>
+   <link rel="stylesheet" href="~/css/mystyle.css">
+   <link rel="icon" href="~/images/favicon.ico">
+   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
-  <header>
-     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-           <a class="navbar-item" asp-controller="Home" asp-action="Index">
-              <img src="~/images/AscendLogo.png" alt="Ascend" width="112" height="28">
-           </a>
+   <div class="main-container">
+      <header>
+         <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+               <a class="navbar-item" asp-controller="Home" asp-action="Index">
+                  <img src="~/images/AscendLogo.png" alt="Ascend" width="112" height="28">
+               </a>
 
-           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-           </a>
-        </div>
+               <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+               </a>
+            </div>
 
-        <div class="navbar-start">
-           <a class="navbar-item" asp-controller="User" asp-action="History"><strong>History</strong></a>
-           <a class="navbar-item" asp-controller="Home" asp-action="Predict"><strong>Predict</strong></a>
-        </div>
+            <div class="navbar-start">
+               <a class="navbar-item" asp-controller="User" asp-action="History"><strong>History</strong></a>
+               <a class="navbar-item" asp-controller="Home" asp-action="Predict"><strong>Predict</strong></a>
+            </div>
 
-        <partial name="PartialNav" />
-     </nav>
-  </header>
-  <section class="section">
-    <div class="container">
-      @RenderBody()
-    </div>
-  </section>
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <strong>MLT Ascend</strong> was created by Jacob Covington, Mason Degeneffe & Nathan Johnson.
-      </p>
-      <p>The project is licensed under
-        <a href=" https://github.com/jacobcov/MLT-Ascend/blob/master/LICENSE">GPL-3.0</a>.
-      </p>
-    </div>
-  </footer>
-  @RenderSection("Scripts", required: false)
+            <partial name="PartialNav" />
+         </nav>
+      </header>
+      <section class="section">
+         <div class="container">
+            @RenderBody()
+         </div>
+      </section>
+      <footer class="footer">
+         <div class="content has-text-centered">
+            <p>
+               <strong>MLT Ascend</strong> was created by Jacob Covington, Mason Degeneffe & Nathan Johnson.
+            </p>
+            <p>
+               The project is licensed under
+               <a href=" https://github.com/jacobcov/MLT-Ascend/blob/master/LICENSE">GPL-3.0</a>.
+            </p>
+         </div>
+      </footer>
+   </div>
+   @RenderSection("Scripts", required: false)
 </body>
 </html>

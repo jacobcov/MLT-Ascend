@@ -4,25 +4,24 @@
 @{ var n = ViewBag.news;}
 
 @{ foreach (var news in n)
-    {
-        <div>
-            <div>@news.Headline</div>
-            <div>
-                <div>@news.DateTime</div>
-                <div>Source: @news.Source</div>
-            </div>
-            <div>
-                <div>Article link: <a href="@news.Url">@news.Url</a></div>
-            </div>
-            <div>
-                <div>Summary:</div>
-            </div>
-            <div>
-                <div>@news.Summary</div>
-            </div>
-            <div>Related: @news.Related</div>
-        </div>
-        <br />
-    }
-    <div>*we cannot confirm the relatedness of the news articles</div>
+   {
+      <div>
+         <div>@news.Headline</div>
+         <div>
+            <div>Date: @news.DateTime</div>
+            <div>Source: @news.Source</div>
+         </div>
+         <div>
+            <div>Article link: <a href="@news.Url">@news.Url</a></div>
+         </div>
+         <div>
+            <div>Summary:</div>
+         </div>
+         <div>
+            <div>@news.Summary</div>
+         </div>
+      </div>
+      <br />
+   }
+   <div>* News results powered by <a href="https://newsapi.org/">News API</a>. We cannot personally verify that these articles are helpful or informative when it comes to your particular stock</div>
 }
