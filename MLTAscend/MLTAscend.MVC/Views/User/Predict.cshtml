@@ -57,6 +57,19 @@
    </div>
 </div>
 
+@{ if (ViewBag.Prediction != null)
+   {
+   <div class="box">
+      <div>
+         This is a test of the extreme weather monitoring service
+      </div>
+      <div>
+         <partial name="_StockPlotPartial" />
+      </div>
+   </div>
+   }
+}
+
 @if (ViewBag.news != null)
 {
 <div class="box">
