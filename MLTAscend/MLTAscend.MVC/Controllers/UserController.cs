@@ -71,8 +71,8 @@ namespace MLTAscend.MVC.Controllers
          return View("../Home/Index");
       }
 
-      [Route("[controller]/Logs/{sort?}")]
-      public IActionResult Logs(string sort)
+      [Route("[controller]/History/{sort?}")]
+      public IActionResult History(string sort)
       {
          var uvm = new UserViewModel();
 
@@ -88,7 +88,7 @@ namespace MLTAscend.MVC.Controllers
             {
                Predictions = uvm.GetPredictionsByUser(user.Username)
             };
-         }         
+         }
          else
          {
             log = new Log()
@@ -150,10 +150,10 @@ namespace MLTAscend.MVC.Controllers
                break;
          }
 
-         return View("../User/Logs", log);
+         return View("../User/History", log);
       }
 
-      public async Task<IActionResult> Ticker(Ticker ticker)
+      public async Task<IActionResult> Predict(Ticker ticker)
       {
          var uvm = new UserViewModel();
          var _data = await GetTickerData(ticker);
@@ -177,7 +177,7 @@ namespace MLTAscend.MVC.Controllers
          var news = await GetTickerNews(ticker);
          ViewBag.news = news;
 
-         return View("../User/Ticker");
+         return View("../User/Predict");
       }
 
       public async Task<IEnumerable<Symbol>> GetTickerData(Ticker ticker)
