@@ -189,7 +189,10 @@ namespace MLTAscend.MVC.Controllers
             HttpResponseMessage response = await HttpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var responseBody = await response.Content.ReadAsStringAsync();
-
+            if (responseBody == "Unknown symbol")
+            {
+               throw new HttpRequestException();
+            }
             var tickerData = JsonConvert.DeserializeObject<IEnumerable<Symbol>>(responseBody);
 
             return tickerData;
