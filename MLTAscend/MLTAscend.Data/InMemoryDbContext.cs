@@ -4,24 +4,17 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MLTAscend.Domain.Models;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.Extensions.Configuration;
-
+using Microsoft.EntityFrameworkCore.InMemory;
 namespace MLTAscend.Data
 {
-   public class MltAscendDbContext : DbContext
+   public class InMemoryDbContext : DbContext
    {
-      public MltAscendDbContext(IConfiguration config)
-      {
-         Configuration = config;
-      }
-
-      public static IConfiguration Configuration { get; set; }
       public DbSet<User> Users { get; set; }
       public DbSet<Prediction> Predictions { get; set; }
 
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
       {
-         optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MLTAscendDatabase"));
+         optionsBuilder.UseInMemoryDatabase("TestingDb");
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)

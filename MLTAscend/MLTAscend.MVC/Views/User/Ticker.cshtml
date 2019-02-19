@@ -1,0 +1,64 @@
+﻿@model MLTAscend.MVC.Models.Ticker
+
+@{
+   ViewData["Title"] = "Ticker";
+}
+
+<div class="box">
+   @using (Html.BeginForm("Ticker", "User"))
+   {
+      <div class="field">
+         @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
+         <div class="control">
+            @Html.TextBoxFor(m => m.Symbol, new { @class = "input", @id = "symbol" })
+         </div>
+         <p class="help is-danger">@Html.ValidationMessageFor(m => m.Symbol)</p>
+      </div>
+      <div class="control">
+         <button type="submit" class="button is-primary" id="getTicker">Get Info</button>
+      </div>
+   }
+   @{ if (ViewBag.tickerDay != null)
+      {
+         var tick = ViewBag.tickerDay;
+         <div>
+            <div>@tick.Ticker: @tick.CompanyName</div>
+            <div>Date: @tick.Date</div>
+            <div>
+               <div>Open: @tick.Open</div>
+               <div>High: @tick.High</div>
+               <div>Low: @tick.Low</div>
+               <div>Close: @tick.Close</div>
+               <br />
+            </div>
+         </div>
+      }
+   }
+
+   @{ if (ViewBag.Prediction != null)
+      {
+         <div>
+            This is a test of the extreme weather monitoring service
+         </div>
+         <div>
+            <partial name="_StockPlotPartial" />
+         </div>
+      }
+   }
+
+
+   @{ if (ViewBag.news != null)
+      {
+         <div>
+            <partial name="_NewsPartial" />
+         </div>
+      }
+   }
+</div>
+
+@section Scripts
+   {
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -7,64 +7,90 @@ using dat = MLTAscend.Data.Helpers;
 
 namespace MLTAscend.Tests.UnitTests
 {
-   [Collection("SQL DB Tests")]
-   public class UserHelperTests
-   {
-      private dom.User sut;
-      private dom.User ExistUser;
-      public dat.UserHelper UserHelper { get; set; }
-      public string Ticker = "ryry";
+    [Collection("DbHelperTests")]
+    public class UserHelperTests
+    {
+        private dom.User sut { get; set; }
+        private dom.User ExistUser;
+        private dom.Prediction pr;
+        public dat.UserHelper UserHelper { get; set; }
+        public dat.PredictionHelper ph { get; set; }
 
-      public UserHelperTests()
-      {
-         ExistUser = new dom.User()
-         {
-            Name = "fred",
-            Username = "belottef",
-            Password = "peoples"
-         };
+        public UserHelperTests()
+        {
+            ExistUser = new dom.User()
+            {
+                Name = "anon",
+                Username = "anonymous",
+                Password = "password"
+            };
 
-         UserHelper = new dat.UserHelper();
-      }
+            sut = new dom.User()
+            {
+                Name = "john",
+                Username = "jacob",
+                Password = "jingle"
+            };
 
-      [Fact]
-      public void Test_SetUser_Fail()
-      {
-         Assert.False(UserHelper.SetUser(ExistUser));
-      }
+            pr = new dom.Prediction()
+            {
+                Ticker = "ryry"
+            };
 
-      [Fact]
-      public void Test_GetUserByUsername()
-      {
-         var actual = UserHelper.GetUserByUsername(ExistUser.Username);
+            UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
+            ph = new dat.PredictionHelper(new Data.InMemoryDbContext());
 
-         Assert.True(actual.Username == ExistUser.Username);
-      }
+            UserHelper.SetUser(ExistUser);
+            ph.SetPrediction(pr, ExistUser.Username);
+        }
 
-      [Fact]
-      public void Test_GetUserPredictions()
-      {
-         var actual = UserHelper.GetUserPredictions(ExistUser.Username);
+        [Fact]
+        public void Test_SetUser_Fail()
+        {
+            Assert.False(UserHelper.SetUser(ExistUser));
+        }
 
-         Assert.True(actual.Count > 0);
-         Assert.True(actual[0].Ticker == "ryry");
-      }
+        [Fact]
+        public void Test_SetUser_Succeed()
+        {
+            Assert.True(UserHelper.SetUser(sut));
+        }
 
-      [Fact]
-      public void Test_GetUsers()
-      {
-         var actual = UserHelper.GetUsers();
+        [Fact]
+        public void Test_GetUserByUsername()
+        {
+            var actual = UserHelper.GetUserByUsername(ExistUser.Username);
 
-         Assert.True(actual.Count > 0);
-         Assert.True(actual[1].Username == ExistUser.Username);
-      }
+            Assert.True(actual.Username == ExistUser.Username);
+        }
 
-      [Fact]
-      public void Test_GetAnonymousPredictions()
-      {
-         var actual = UserHelper.GetAnonymousPredictions();
+        [Fact]
+        public void Test_GetUserPredictions()
+        {
+            var actual = UserHelper.GetUserPredictions(ExistUser.Username);
 
-         Assert.True(actual[0].Ticker == Ticker);
-      }
-   }
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == "ryry");
+            Assert.True(actual[0].User.Username == ExistUser.Username);
+        }
+
+        [Fact]
+        public void Test_GetAnonymousPrediction()
+        {
+            var actual = UserHelper.GetAnonymousPredictions();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == "ryry");
+            Assert.True(actual[0].User.Username == ExistUser.Username);
+        }
+
+        [Fact]
+        public void Test_GetUsers()
+        {
+            var actual = UserHelper.GetUsers();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Username == ExistUser.Username);
+        }
+    }
 }

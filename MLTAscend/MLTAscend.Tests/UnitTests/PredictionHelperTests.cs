@@ -7,59 +7,70 @@ using dat = MLTAscend.Data.Helpers;
 
 namespace MLTAscend.Tests.UnitTests
 {
-   [Collection("SQL DB Tests")]
-   public class PredictionHelperTests
-   {
-      private dom.Prediction sut;
-      private dom.User User;
-      public dat.PredictionHelper PredictionHelper { get; set; }
+    [Collection("DbHelperTests")]
+    public class PredictionHelperTests
+    {
+        private dom.Prediction sut;
+        private dom.User User;
+        public dat.PredictionHelper PredictionHelper { get; set; }
+        public dat.UserHelper UserHelper { get; set; }
+        public dom.Prediction Pred;
 
-      public PredictionHelperTests()
-      {
-         User = new dom.User()
-         {
-            Name = "fred",
-            Username = "belottef",
-            Password = "peoples"
-         };
+        public PredictionHelperTests()
+        {
+            User = new dom.User()
+            {
+                Name = "anon",
+                Username = "anonymous",
+                Password = "password"
+            };
 
-         sut = new dom.Prediction()
-         {
-            CompanyName = "ryry's chicken and waffles",
-            Ticker = "ryry",
+            Pred = new dom.Prediction()
+            {
+                Ticker = "ryry"
+            };
 
-         };
+            sut = new dom.Prediction()
+            {
+                CompanyName = "ryry's chicken and waffles",
+                Ticker = "ryry",
 
-         PredictionHelper = new dat.PredictionHelper();
-      }
+            };
 
-      [Fact]
-      public void Test_SetPrediction()
-      {
-         Assert.True(PredictionHelper.SetPrediction(sut, User.Username));
-      }
+            PredictionHelper = new dat.PredictionHelper(new Data.InMemoryDbContext());
+            UserHelper = new dat.UserHelper(new Data.InMemoryDbContext());
 
-      [Fact]
-      public void Test_GetPredictionByTicker()
-      {
-         var actual = PredictionHelper.GetPredictionByTicker(sut.Ticker);
+            UserHelper.SetUser(User);
+            PredictionHelper.SetPrediction(Pred, User.Username);
+        }
 
-         Assert.True(actual.Ticker == sut.Ticker);
-      }
+        [Fact]
+        public void Test_SetPrediction()
+        {
+            Assert.True(PredictionHelper.SetPrediction(sut, User.Username));
+        }
 
-      [Fact]
-      public void Test_GetPredictions()
-      {
-         var actual = PredictionHelper.GetPredictions();
+        [Fact]
+        public void Test_SetAnonymousPrediction()
+        {
+            Assert.True(PredictionHelper.SetAnonymousPrediction(sut));
+        }
 
-         Assert.True(actual.Count > 0);
-         Assert.True(actual[0].Ticker == sut.Ticker);
-      }
+        [Fact]
+        public void Test_GetPredictionByTicker()
+        {
+            var actual = PredictionHelper.GetPredictionByTicker(sut.Ticker);
 
-      [Fact]
-      public void Test_SetAnonymousPrediction()
-      {
-         Assert.True(PredictionHelper.SetAnonymousPrediction(sut));
-      }
-   }
+            Assert.True(actual.Ticker == sut.Ticker);
+        }
+
+        [Fact]
+        public void Test_GetPredictions()
+        {
+            var actual = PredictionHelper.GetPredictions();
+
+            Assert.True(actual.Count > 0);
+            Assert.True(actual[0].Ticker == sut.Ticker);
+        }
+    }
 }
