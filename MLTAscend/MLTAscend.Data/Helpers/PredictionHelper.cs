@@ -10,12 +10,12 @@ namespace MLTAscend.Data.Helpers
 {
    public class PredictionHelper
    {
-      public MLTAscendDbContext ExtContext { get; set; }
+      public MltAscendDbContext ExtContext { get; set; }
       public InMemoryDbContext IntContext { get; set; }
 
       public PredictionHelper()
       {
-         ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+         ExtContext = new MltAscendDbContext(MltAscendDbContext.Configuration);
          IntContext = null;
       }
 

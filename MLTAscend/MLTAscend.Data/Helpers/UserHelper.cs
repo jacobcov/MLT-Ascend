@@ -8,12 +8,12 @@ namespace MLTAscend.Data.Helpers
 {
    public class UserHelper
    {
-      public MLTAscendDbContext ExtContext { get; set; }
+      public MltAscendDbContext ExtContext { get; set; }
       public InMemoryDbContext IntContext { get; set; }
 
       public UserHelper()
       {
-         ExtContext = new MLTAscendDbContext(MLTAscendDbContext.Configuration);
+         ExtContext = new MltAscendDbContext(MltAscendDbContext.Configuration);
          IntContext = null;
       }
 
