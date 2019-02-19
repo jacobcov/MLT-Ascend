@@ -10,7 +10,7 @@
       <div class="field">
          @Html.LabelFor(m => m.Symbol, "Symbol", new { @class = "label" })
          <div class="control">
-            @Html.TextBoxFor(m => m.Symbol, new { @class = "input", @id = "symbol" })
+            @Html.TextBoxFor(m => m.Symbol, new { @class = "input", @id = "symbol", @placeholder = "eg. MSFT" })
          </div>
          <p class="help is-danger">@Html.ValidationMessageFor(m => m.Symbol)</p>
       </div>
