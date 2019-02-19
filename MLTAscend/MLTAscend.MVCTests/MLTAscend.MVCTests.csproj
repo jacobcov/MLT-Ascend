@@ -7,16 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MLTAscend.Data\MLTAscend.Data.csproj" />
-    <ProjectReference Include="..\MLTAscend.Domain\MLTAscend.Domain.csproj" />
     <ProjectReference Include="..\MLTAscend.MVC\MLTAscend.MVC.csproj" />
-    <ProjectReference Include="..\MLTAscend.Trainer\MLTAscend.Trainer.csproj" />
   </ItemGroup>
 
 </Project>
