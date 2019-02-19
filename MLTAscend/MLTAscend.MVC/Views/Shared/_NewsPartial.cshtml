@@ -1,26 +1,19 @@
-﻿<h2>Related News*</h2>
-<br />
+﻿<h4 class="title is-4"><strong>Related News</strong>*</h4>
 
 @{ var n = ViewBag.news;}
 
 @{ foreach (var news in n)
    {
-      <div>
-         <div>@news.Headline</div>
-         <div>
-            <div>Date: @news.DateTime</div>
-            <div>Source: @news.Source</div>
-         </div>
-         <div>
-            <div>Article link: <a href="@news.Url">@news.Url</a></div>
-         </div>
-         <div>
-            <div>Summary:</div>
-         </div>
-         <div>
+      <article class="message is-primary">
+         <h4 class="message-header title is-4">@news.Headline</h4>
+         <div class="message-body">
+            <div><strong>Date</strong>: @news.DateTime</div>
+            <div><strong>Source</strong>: @news.Source</div>
+            <div><strong>Article link</strong>: <a href="@news.Url">@news.Url</a></div>
+            <div><strong>Summary</strong>:</div>
             <div>@news.Summary</div>
          </div>
-      </div>
+      </article>
       <br />
    }
    <div>* News results powered by <a href="https://newsapi.org/">News API</a>. We cannot personally verify that these articles are helpful or informative when it comes to your particular stock</div>
