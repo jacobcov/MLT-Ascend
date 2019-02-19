@@ -88,7 +88,7 @@ namespace MLTAscend.MVC.Controllers
             {
                Predictions = uvm.GetPredictionsByUser(user.Username)
             };
-         }         
+         }
          else
          {
             log = new Log()
