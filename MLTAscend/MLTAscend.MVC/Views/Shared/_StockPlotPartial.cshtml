@@ -1,14 +1,16 @@
-﻿@*
+﻿@using MLTAscend.Domain.Models
+@using MLTAscend.MVC.Models
+@*
    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <div id="chart_div"></div>
 
 
-@section scripts{
 
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-   <script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
       google.charts.load('current', { packages: ['corechart', 'line'] });
       google.charts.setOnLoadCallback(drawBasic);
 
@@ -18,13 +20,13 @@
 
          var data = new google.visualization.DataTable();
          data.addColumn('number', 'Date');
-         data.addColumn('number', @ViewBag.tickerDay.Ticker);
+         data.addColumn('number', '@ViewBag.tickerDay.Ticker');
          @{
            var l = (List<Symbol>)ViewBag.tickerData;
             l.Reverse();
           foreach (var item in l)
             {
-               @:data.addRows([@l.IndexOf(item)*-1,@item.High])
+               @:data.addRows([[@l.IndexOf(item)*-1,@item.High]])
             }
             }
          data.addRows([
@@ -45,7 +47,7 @@
          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
          chart.draw(data, options);
-      }
-   </script>
+   }
+</script>
 
-}
+
