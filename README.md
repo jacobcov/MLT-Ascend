@@ -33,6 +33,10 @@ Our goal: create an easy to use system with the ability to reveal lucrative oppo
 - Azure App Services
 - Azure SQL Database
 
+## Stock Data Utilized
+- MSFT - Microsoft
+- AMZN - Amazon
+- XOM - Exxon Mobil
 
 # Maintainers
 
